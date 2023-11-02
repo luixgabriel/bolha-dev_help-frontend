@@ -6,7 +6,7 @@ const Header = () => {
     <header className="w-screen px-3 py-2 flex items-center justify-between">
       <h1 className="font-black text-2xl">bolha dev_help</h1>
       <div className="flex items-center justify-center gap-4 mx-2">
-        <Search size={20} className="sm:hidden" />
+        <Search size={20} className="sm:hidden cursor-pointer" />
         <input
           type="text"
           placeholder="Qual é a sua dúvida?"
@@ -14,7 +14,9 @@ const Header = () => {
         />
 
         <Moon size={20} />
-        <span className="font-black text-1xl">Entrar</span>
+        <span className="font-black text-1xl cursor-pointer">
+          <a href="/login">Entrar</a>
+        </span>
       </div>
     </header>
   )
