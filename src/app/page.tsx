@@ -11,8 +11,6 @@ export default function Home() {
     const token = Cookies.get('token')
     if (token) {
       setIsAuthenticated(true)
-    } else {
-      console.log('sem token')
     }
   }, [])
   return (

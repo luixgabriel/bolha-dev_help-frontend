@@ -2,10 +2,8 @@
 import React from 'react'
 import GithubIcon from '../components/icons/github-icon'
 import Link from 'next/link'
-import { useAuth } from '../../hooks/useAuth'
 
 const Login = () => {
-  const { setIsAuthenticated } = useAuth()
   return (
     <div className="flex min-h-full  flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -20,7 +18,7 @@ const Login = () => {
       </div>
 
       <Link
-        href={`https://github.com/login/oauth/authorize?client_id=22355837e0597205c418`}
+        href={`https://github.com/login/oauth/authorize?client_id=a83ada9c87fb4017a65c`}
         className="border border-black p-2 mt-5 rounded-md flex justify-center"
       >
         <span className="font-black text-md flex gap-2">
