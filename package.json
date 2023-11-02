@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.4.3",
+    "axios": "^1.6.0",
     "lucide-react": "^0.291.0",
     "next": "14.0.1",
     "react-dom": "^18"

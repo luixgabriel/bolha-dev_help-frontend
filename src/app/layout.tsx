@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from './components/header'
+import { DefaultProviders } from './components/default-providers'
 
 const cafe = localFont({
   src: '../fonts/Louis George Cafe Light.ttf',
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cafe.className}>
-        <Header />
-        {children}
+        <DefaultProviders>
+          <Header />
+          {children}
+        </DefaultProviders>
       </body>
     </html>
   )
