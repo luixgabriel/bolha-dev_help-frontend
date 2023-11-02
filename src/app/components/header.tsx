@@ -1,8 +1,11 @@
 import { Moon, Search } from 'lucide-react'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
+import Profile from './profile'
 
 const Header = () => {
+  const isAuthenticated = cookies().has('token')
   return (
     <header className="w-screen px-3 py-2 flex items-center justify-between">
       <Link href="/">
@@ -17,9 +20,13 @@ const Header = () => {
         />
 
         <Moon size={20} />
-        <span className="font-black text-1xl cursor-pointer">
-          <Link href="/login">Entrar</Link>
-        </span>
+        {isAuthenticated ? (
+          <Profile />
+        ) : (
+          <span className="font-black text-1xl cursor-pointer">
+            <Link href="/login">Entrar</Link>
+          </span>
+        )}
       </div>
     </header>
   )
