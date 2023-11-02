@@ -1,25 +1,40 @@
 import React from 'react'
+import GithubIcon from '../components/icons/github-icon'
 
 const page = () => {
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-full  flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-12 w-auto"
           src="logo.png"
           alt="Your Company"
         />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Entre com a sua conta
+        <h2 className=" mt-5 text-center text-2xl font-bold leading-9 ">
+          Entrar com
         </h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <button className="border border-black p-2 mt-5 rounded-md flex justify-center">
+        <span className="font-black text-md flex gap-2">
+          Github <GithubIcon />
+        </span>
+      </button>
+
+      <div className="flex mt-6 items-center">
+        <div className="h-[1px] flex-grow bg-black"></div>
+        <p className="text-center text-md leading-5 text-gray-500 font-bold mx-4">
+          Ou continue com
+        </p>
+        <div className="h-[1px] flex-grow bg-black"></div>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" action="#" method="POST">
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm leading-6 font-black"
             >
               Email
             </label>
@@ -30,7 +45,7 @@ const page = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-black focus:ring-2 focus:ring-inset"
               />
             </div>
           </div>
@@ -39,7 +54,7 @@ const page = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6"
+                className="block text-sm leading-6 font-black"
               >
                 Senha
               </label>
@@ -48,10 +63,10 @@ const page = () => {
               <input
                 id="password"
                 name="password"
-                type="password"
+                type="text"
                 autoComplete="current-password"
                 required
-                className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-black focus:ring-2 focus:ring-inset"
               />
             </div>
           </div>
