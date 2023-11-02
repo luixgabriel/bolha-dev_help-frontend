@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import axios from '../../../../services/axios'
 
 export async function GET(request: NextRequest) {
-  NextResponse.json({ msg: 'FUNCINOA PÓRRA' })
+  return NextResponse.json({ msg: 'FUNCINOA PÓRRA' })
   // const { searchParams } = new URL(request.url)
   // const code = searchParams.get('code')
   // const redirectTo = request.cookies.get('redirectTo')?.value
