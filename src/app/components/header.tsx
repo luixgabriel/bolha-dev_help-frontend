@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="w-screen px-3 py-2  flex items-center justify-between">
       <Link href="/">
-        <h1 className="font-black text-xl">bolha dev_help</h1>
+        <h1 className="font-black text-lg">bolha dev_help</h1>
       </Link>
       <div className="flex items-center justify-center gap-4 mx-2">
         <Search size={20} className="sm:hidden cursor-pointer" />
