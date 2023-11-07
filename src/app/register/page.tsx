@@ -1,26 +1,38 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RegisterData, registerSchema } from '../../types/register-schema'
 import axios from '../../services/axios'
+import normalizePassword from '../../utils/normalizePassword'
 
 const Page = () => {
   const {
     handleSubmit,
     register,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<RegisterData>({
     resolver: zodResolver(registerSchema),
   })
+  const [passwordReal, setPasswordReal] = useState<string>('')
+  const passwordValue = watch('password')
+
+  useEffect(() => {
+    setPasswordReal(passwordValue)
+    setValue('password', normalizePassword(passwordValue) as string)
+  }, [passwordValue])
 
   const onSubmit = async (data: RegisterData) => {
-    try {
-      const response = await axios.post('/users', data)
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
+    console.log(passwordReal)
+    console.log(data)
+    // try {
+    //   const response = await axios.post('/users', data)
+    //   console.log(response)
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
   return (
     <div className="flex min-h-full  flex-1 flex-col justify-center px-6 py-12 lg:px-8">

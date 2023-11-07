@@ -4,8 +4,8 @@ import './globals.css'
 import Header from './components/header'
 import { DefaultProviders } from './components/default-providers'
 
-const cafe = localFont({
-  src: '../fonts/Louis George Cafe Light.ttf',
+const coolvetica = localFont({
+  src: '../fonts/coolvetica rg.otf',
   display: 'swap',
 })
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cafe.className}>
+      <body className={coolvetica.className}>
         <DefaultProviders>
           <Header />
           {children}
