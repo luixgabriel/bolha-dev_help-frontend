@@ -7,23 +7,23 @@ import Profile from './profile'
 const Header = () => {
   const isAuthenticated = cookies().has('token')
   return (
-    <header className="w-screen px-3 py-2 flex items-center justify-between">
+    <header className="w-screen px-3 py-2  flex items-center justify-between">
       <Link href="/">
-        <h1 className="font-black text-2xl">bolha dev_help</h1>
+        <h1 className="font-black text-xl">bolha dev_help</h1>
       </Link>
       <div className="flex items-center justify-center gap-4 mx-2">
         <Search size={20} className="sm:hidden cursor-pointer" />
         <input
           type="text"
           placeholder="Qual é a sua dúvida?"
-          className="text-sm bg-transparent rounded-md px-3 py-1 border border-black hidden sm:inline-block"
+          className="text-sm bg-transparent rounded-md px-2 py-1 border border-black hidden sm:inline-block"
         />
 
         <Moon size={20} />
         {isAuthenticated ? (
           <Profile />
         ) : (
-          <span className="font-black text-1xl cursor-pointer">
+          <span className="text-1xl font-base scursor-pointer">
             <Link href="/login">Entrar</Link>
           </span>
         )}

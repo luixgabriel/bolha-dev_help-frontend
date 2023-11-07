@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from './components/header'
 import { DefaultProviders } from './components/default-providers'
 
 const coolvetica = localFont({
-  src: '../fonts/coolvetica rg.otf',
+  src: '../fonts/Garet-Book.ttf',
   display: 'swap',
 })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         <DefaultProviders>
           <Header />
           {children}
+          <Toaster />
         </DefaultProviders>
       </body>
     </html>

@@ -1,50 +1,35 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RegisterData, registerSchema } from '../../types/register-schema'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'sonner'
 import axios from '../../services/axios'
-import normalizePassword from '../../utils/normalizePassword'
+import LoginContainer from '../components/containers/login-container'
 
 const Page = () => {
   const {
     handleSubmit,
     register,
-    setValue,
-    watch,
     formState: { errors },
   } = useForm<RegisterData>({
     resolver: zodResolver(registerSchema),
   })
-  const [passwordReal, setPasswordReal] = useState<string>('')
-  const passwordValue = watch('password')
-
-  useEffect(() => {
-    setPasswordReal(passwordValue)
-    setValue('password', normalizePassword(passwordValue) as string)
-  }, [passwordValue])
 
   const onSubmit = async (data: RegisterData) => {
-    console.log(passwordReal)
-    console.log(data)
-    // try {
-    //   const response = await axios.post('/users', data)
-    //   console.log(response)
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    await axios.post('/users', data)
   }
+
   return (
-    <div className="flex min-h-full  flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <LoginContainer>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-12 w-auto"
           src="logo.png"
           alt="Your Company"
         />
-        <h2 className=" mt-5 text-center text-2xl font-bold leading-9 ">
-          Registre-se
-        </h2>
+        <h2 className=" mt-5 text-center text-2xl  leading-9 ">Registre-se</h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -52,7 +37,7 @@ const Page = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm leading-6 font-black"
+              className="block text-sm leading-6 font-base"
             >
               Email
             </label>
@@ -60,21 +45,16 @@ const Page = () => {
               <input
                 {...register('email')}
                 type="email"
-                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-black focus:ring-2 focus:ring-inset"
+                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
               {errors.email && (
-                <p className="text-red-500 font-black mt-1">
-                  {errors.email.message}
-                </p>
+                <p className="text-red-500  mt-1">{errors.email.message}</p>
               )}
             </div>
           </div>
 
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm leading-6 font-black"
-            >
+            <label htmlFor="name" className="block text-sm leading-6 font-base">
               Nome
             </label>
             <div className="mt-2">
@@ -83,12 +63,10 @@ const Page = () => {
                   required: 'Campo obrigatório',
                 })}
                 type="text"
-                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-black focus:ring-2 focus:ring-inset"
+                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
               {errors.name && (
-                <p className="text-red-500 font-black mt-1">
-                  {errors.name.message}
-                </p>
+                <p className="text-red-500  mt-1">{errors.name.message}</p>
               )}
             </div>
           </div>
@@ -97,7 +75,7 @@ const Page = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm leading-6 font-black"
+                className="block text-sm leading-6 font-base"
               >
                 Senha
               </label>
@@ -109,12 +87,10 @@ const Page = () => {
                 })}
                 name="password"
                 type="password"
-                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-black focus:ring-2 focus:ring-inset"
+                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
               {errors.password && (
-                <p className="text-red-500 font-black mt-1">
-                  {errors.password.message}
-                </p>
+                <p className="text-red-500  mt-1">{errors.password.message}</p>
               )}
             </div>
           </div>
@@ -122,14 +98,14 @@ const Page = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-md text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Criar conta
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </LoginContainer>
   )
 }
 
