@@ -3,10 +3,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RegisterData, registerSchema } from '../../types/register-schema'
-import { useMutation } from '@tanstack/react-query'
-import { toast } from 'sonner'
-import axios from '../../services/axios'
 import LoginContainer from '../components/containers/login-container'
+import { useLoginDataMutate } from '../../hooks/useLoginMutate'
+import LoadingIcon from '../components/icons/loading-icon'
 
 const Page = () => {
   const {
@@ -17,8 +16,10 @@ const Page = () => {
     resolver: zodResolver(registerSchema),
   })
 
+  const { mutate, isPending } = useLoginDataMutate()
+
   const onSubmit = async (data: RegisterData) => {
-    await axios.post('/users', data)
+    mutate(data)
   }
 
   return (
@@ -100,7 +101,7 @@ const Page = () => {
               type="submit"
               className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-md text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Criar conta
+              {isPending ? <LoadingIcon /> : 'Criar conta'}
             </button>
           </div>
         </form>

@@ -15,10 +15,11 @@ export default function Home() {
   }, [])
   return (
     <ContainerMain>
-      <div className="flex flex-col items-center mt-14">
-        <h1 className="text-2xl text-center">
+      <div className="flex flex-col items-center mt-14 w-screen ">
+        <h1 className="text-2xl text-center overflow-hidden">
           Ajudar alguém em necessidade é um privilégio que todos nós temos.
         </h1>
+
         <HelpfulSign />
       </div>
     </ContainerMain>

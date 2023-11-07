@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Toaster } from 'sonner'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from './components/header'
@@ -25,8 +26,12 @@ export default function RootLayout({
       <body className={coolvetica.className}>
         <DefaultProviders>
           <Header />
+          <ToastContainer
+            position="bottom-right"
+            theme="dark"
+            autoClose={1500}
+          />
           {children}
-          <Toaster />
         </DefaultProviders>
       </body>
     </html>

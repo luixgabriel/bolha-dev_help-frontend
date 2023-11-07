@@ -7,7 +7,7 @@ import Profile from './profile'
 const Header = () => {
   const isAuthenticated = cookies().has('token')
   return (
-    <header className="w-screen px-3 py-2  flex items-center justify-between">
+    <header className="w-screen px-3 py-3  flex items-center justify-between">
       <Link href="/">
         <h1 className="font-black text-lg">bolha dev_help</h1>
       </Link>
@@ -23,7 +23,7 @@ const Header = () => {
         {isAuthenticated ? (
           <Profile />
         ) : (
-          <span className="text-1xl font-base scursor-pointer">
+          <span className="text-md font-base scursor-pointer">
             <Link href="/login">Entrar</Link>
           </span>
         )}
