@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
+import defaultImg from '../../assets/imgs/null.png'
 import { getUser } from '../../utils/decode'
 
 const Profile = () => {
   const { imageUrl } = getUser()
-  console.log(imageUrl)
   return (
     <div className="flex items-center gap-3 text-left">
       <Image
-        src={imageUrl as string}
+        src={imageUrl ? (imageUrl as string) : defaultImg}
         width={40}
         height={40}
         alt=""

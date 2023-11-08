@@ -6,6 +6,8 @@ import { RegisterData, registerSchema } from '../../types/register-schema'
 import LoginContainer from '../components/containers/login-container'
 import { useLoginDataMutate } from '../../hooks/useLoginMutate'
 import LoadingIcon from '../components/icons/loading-icon'
+import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 const Page = () => {
   const {
@@ -16,10 +18,16 @@ const Page = () => {
     resolver: zodResolver(registerSchema),
   })
 
+  const token = Cookies.get('token')
+  const router = useRouter()
   const { mutate, isPending } = useLoginDataMutate()
 
   const onSubmit = async (data: RegisterData) => {
     mutate(data)
+  }
+
+  if (token) {
+    router.push('/')
   }
 
   return (

@@ -19,7 +19,6 @@ export default function Home() {
         <h1 className="text-2xl text-center overflow-hidden">
           Ajudar alguém em necessidade é um privilégio que todos nós temos.
         </h1>
-
         <HelpfulSign />
       </div>
     </ContainerMain>

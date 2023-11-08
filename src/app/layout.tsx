@@ -7,7 +7,7 @@ import Header from './components/header'
 import { DefaultProviders } from './components/default-providers'
 
 const coolvetica = localFont({
-  src: '../fonts/Garet-Book.ttf',
+  src: '../assets/fonts/Garet-Book.ttf',
   display: 'swap',
 })
 
