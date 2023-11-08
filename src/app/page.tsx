@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import Cookies from 'js-cookie'
 import ContainerMain from './components/containers/container-main'
-import HelpfulSign from './components/helpful-sign'
+import homeImg from '../assets/imgs/main.png'
+import Image from 'next/image'
 
 export default function Home() {
   const { setIsAuthenticated } = useAuth()
@@ -19,7 +20,7 @@ export default function Home() {
         <h1 className="text-2xl text-center overflow-hidden">
           Ajudar alguém em necessidade é um privilégio que todos nós temos.
         </h1>
-        <HelpfulSign />
+        <Image src={homeImg} width={500} alt="girl running" />
       </div>
     </ContainerMain>
   )
