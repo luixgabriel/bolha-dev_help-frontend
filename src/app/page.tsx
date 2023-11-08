@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <ContainerMain>
       <div className="flex flex-col items-center mt-14 w-screen ">
-        <h1 className="text-2xl text-center overflow-hidden">
+        <h1 className="text-lg text-center overflow-hidden">
           Ajudar alguém em necessidade é um privilégio que todos nós temos.
         </h1>
         <Image src={homeImg} width={500} alt="girl running" />

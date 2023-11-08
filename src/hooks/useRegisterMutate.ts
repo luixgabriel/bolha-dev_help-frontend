@@ -2,12 +2,12 @@ import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import { loginData } from '../services/requests'
+import { registerData } from '../services/requests'
 
-export function useLoginDataMutate() {
+export function useRegisterDataMutate() {
   const router = useRouter()
   const mutate = useMutation({
-    mutationFn: loginData,
+    mutationFn: registerData,
     retry: 2,
     onSuccess: (data) => {
       Cookies.set('token', data.token)

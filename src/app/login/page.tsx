@@ -3,8 +3,35 @@ import React from 'react'
 import GithubIcon from '../components/icons/github-icon'
 import Link from 'next/link'
 import LoginContainer from '../components/containers/login-container'
+import Cookies from 'js-cookie'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { LoginData, loginSchema } from '../../types/login-schema'
+import { useRouter } from 'next/navigation'
+import { useLoginDataMutate } from '../../hooks/useLoginMutate'
+import LoadingIcon from '../components/icons/loading-icon'
 
 const Login = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<LoginData>({
+    resolver: zodResolver(loginSchema),
+  })
+
+  const token = Cookies.get('token')
+  const router = useRouter()
+  const { mutate, isPending } = useLoginDataMutate()
+
+  const onSubmit = async (data: LoginData) => {
+    mutate(data)
+  }
+
+  if (token) {
+    router.push('/')
+  }
+
   return (
     <LoginContainer>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -34,7 +61,7 @@ const Login = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label
               htmlFor="email"
@@ -44,13 +71,13 @@ const Login = () => {
             </label>
             <div className="mt-2">
               <input
-                id="email"
-                name="email"
+                {...register('email')}
                 type="email"
-                autoComplete="email"
-                required
                 className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
+              {errors.email && (
+                <p className="text-red-500  mt-1">{errors.email.message}</p>
+              )}
             </div>
           </div>
 
@@ -65,13 +92,16 @@ const Login = () => {
             </div>
             <div className="mt-2">
               <input
-                id="password"
+                {...register('password', {
+                  required: 'Campo obrigatório',
+                })}
                 name="password"
                 type="password"
-                autoComplete="current-password"
-                required
                 className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
+              {errors.password && (
+                <p className="text-red-500  mt-1">{errors.password.message}</p>
+              )}
             </div>
           </div>
 
@@ -80,7 +110,7 @@ const Login = () => {
               type="submit"
               className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Entrar
+              {isPending ? <LoadingIcon /> : 'Entrar'}
             </button>
           </div>
         </form>

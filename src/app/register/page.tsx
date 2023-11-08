@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RegisterData, registerSchema } from '../../types/register-schema'
 import LoginContainer from '../components/containers/login-container'
-import { useLoginDataMutate } from '../../hooks/useLoginMutate'
+import { useRegisterDataMutate } from '../../hooks/useRegisterMutate'
 import LoadingIcon from '../components/icons/loading-icon'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
@@ -20,7 +20,7 @@ const Page = () => {
 
   const token = Cookies.get('token')
   const router = useRouter()
-  const { mutate, isPending } = useLoginDataMutate()
+  const { mutate, isPending } = useRegisterDataMutate()
 
   const onSubmit = async (data: RegisterData) => {
     mutate(data)
