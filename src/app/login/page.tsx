@@ -24,14 +24,14 @@ const Login = () => {
 
   useEffect(() => {
     async function getGithubToken() {
-      const usr = await fetch(
+      const usr = await axios.get(
         `https://bolhadev-help.onrender.com/api/auth/github/user`,
         {
-          credentials: 'include',
+          withCredentials: true,
         },
       )
       console.log(usr)
-
+      setUser(usr.data)
       console.log(user)
     }
 
