@@ -1,13 +1,31 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import Cookies from 'js-cookie'
 import ContainerMain from './components/containers/container-main'
 import homeImg from '../assets/imgs/main.png'
 import Image from 'next/image'
+import axios from '../services/axios'
 
 export default function Home() {
   const { setIsAuthenticated } = useAuth()
+
+  useEffect(() => {
+    async function getGithubToken() {
+      const response = await axios.get(
+        `https://bolhadev-help.onrender.com/api/auth/github/user`,
+        {
+          withCredentials: true,
+        },
+      )
+      if (response.data) {
+        Cookies.set('Meutoken', response.data)
+      }
+    }
+
+    getGithubToken()
+  }, [])
+
   useEffect(() => {
     const token = Cookies.get('token')
     if (token) {

@@ -13,8 +13,6 @@ import LoadingIcon from '../components/icons/loading-icon'
 import axios from '../../services/axios'
 
 const Login = () => {
-  const [user, setUser] = useState<any>(null)
-  const [githubUser, setGithubUser] = useState(false)
   const {
     handleSubmit,
     register,
@@ -22,23 +20,6 @@ const Login = () => {
   } = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
   })
-
-  useEffect(() => {
-    async function getGithubToken() {
-      console.log('chamei')
-      const usr = await axios.get(
-        `https://bolhadev-help.onrender.com/api/auth/github/user`,
-        {
-          withCredentials: true,
-        },
-      )
-      console.log(usr)
-      setUser(usr.data)
-      console.log(user)
-    }
-
-    getGithubToken()
-  }, [githubUser])
 
   const GITHUB_CLIENT_ID = 'a83ada9c87fb4017a65c'
   const gitHubRedirectURL = 'https://bolhadev-help.onrender.com/api/auth/github'
@@ -68,7 +49,6 @@ const Login = () => {
       </div>
 
       <Link
-        onClick={() => setGithubUser(true)}
         href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${gitHubRedirectURL}?path=${path}&scope=user:email`}
         className="border border-black p-2 mt-5 rounded-md flex justify-center"
       >
