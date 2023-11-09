@@ -19,6 +19,7 @@ export default function Home() {
         },
       )
       if (response.data) {
+        console.log(response.data)
         Cookies.set('Meutoken', response.data)
       }
     }
