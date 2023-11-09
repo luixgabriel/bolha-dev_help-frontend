@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import GithubIcon from '../components/icons/github-icon'
 import Link from 'next/link'
 import LoginContainer from '../components/containers/login-container'
@@ -10,8 +10,10 @@ import { LoginData, loginSchema } from '../../types/login-schema'
 import { useRouter } from 'next/navigation'
 import { useLoginDataMutate } from '../../hooks/useLoginMutate'
 import LoadingIcon from '../components/icons/loading-icon'
+import axios from '../../services/axios'
 
 const Login = () => {
+  const [user, setUser] = useState<any>(null)
   const {
     handleSubmit,
     register,
@@ -19,6 +21,26 @@ const Login = () => {
   } = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
   })
+
+  useEffect(() => {
+    async function getGithubToken() {
+      const usr = await axios.get(
+        `https://bolhadev-help.onrender.com/api/auth/github/user`,
+        {
+          withCredentials: true,
+        },
+      )
+      console.log(usr)
+      setUser(usr.data)
+      console.log(user)
+    }
+
+    getGithubToken()
+  }, [])
+
+  const GITHUB_CLIENT_ID = 'a83ada9c87fb4017a65c'
+  const gitHubRedirectURL = 'https://bolhadev-help.onrender.com/api/auth/github'
+  const path = '/'
 
   const token = Cookies.get('token')
   const router = useRouter()
@@ -44,7 +66,7 @@ const Login = () => {
       </div>
 
       <Link
-        href={`https://github.com/login/oauth/authorize?client_id=a83ada9c87fb4017a65c`}
+        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${gitHubRedirectURL}?path=${path}&scope=user:email`}
         className="border border-black p-2 mt-5 rounded-md flex justify-center"
       >
         <span className="text-md flex gap-2 font-base">
