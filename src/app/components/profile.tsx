@@ -1,10 +1,7 @@
 import Image from 'next/image'
-import React from 'react'
 import defaultImg from '../../assets/imgs/null.png'
-import { getUser } from '../../utils/decode'
 
-const Profile = () => {
-  const { imageUrl } = getUser()
+const Profile = ({ imageUrl }: { imageUrl: string | null }) => {
   return (
     <div className="flex items-center gap-3 text-left">
       <Image

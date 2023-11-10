@@ -1,11 +1,31 @@
+'use client'
 import { Moon, Search } from 'lucide-react'
-import { cookies } from 'next/headers'
+import Cookies from 'js-cookie'
+// import { cookies } from 'next/headers'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Profile from './profile'
+import { useAuth } from '../../hooks/useAuth'
+import axios from '../../services/axios'
+import { decodedImage } from '../../utils/decode'
 
 const Header = () => {
-  const isAuthenticated = cookies().has('token')
+  const [decode, setDecode] = useState<any>(null)
+  const { setIsAuthenticated, isAuthenticated } = useAuth()
+  const token = Cookies.get('token')
+
+  useEffect(() => {
+    async function getDecodeToken() {
+      if (token) {
+        const response = await axios.post('/api/auth/github/user', { token })
+        setDecode(response.data)
+        setIsAuthenticated(true)
+      }
+    }
+
+    getDecodeToken()
+  }, [isAuthenticated])
+
   return (
     <header className="w-screen px-3 py-3  flex items-center justify-between">
       <Link href="/">
@@ -20,8 +40,13 @@ const Header = () => {
         />
 
         <Moon size={20} />
+
         {isAuthenticated ? (
-          <Profile />
+          <Profile
+            imageUrl={
+              decode ? decodedImage(decode.imageUrl) : decodedImage(null)
+            }
+          />
         ) : (
           <span className="text-md font-base scursor-pointer">
             <Link href="/login">Entrar</Link>
