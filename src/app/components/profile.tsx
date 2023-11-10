@@ -16,7 +16,21 @@ const Profile = ({ imageUrl }: { imageUrl: string | null }) => {
         alt=""
         className="h-10 w-10 rounded-full cursor-pointer"
       />
-      {menuIsOpen && <h1>abriu</h1>}
+      {menuIsOpen && (
+        <div className="absolute right-4 top-[54px] mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+          <div className="py-1">
+            <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Logout
+            </button>
+            <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Publicar Nova Dúvida
+            </button>
+            <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Minhas Dúvidas
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
