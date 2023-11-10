@@ -12,11 +12,11 @@ export function useRegisterDataMutate() {
     onSuccess: (data) => {
       Cookies.set('token', data.token)
       toast.success('Usuário autenticado com sucesso!')
-      router.refresh()
+      router.push('/')
     },
     onError: (error) => {
       console.log(error)
-      toast.error('Erro ao tentar se cadastrar!')
+      toast.error('Erro ao tentar fazer login!')
     },
   })
 

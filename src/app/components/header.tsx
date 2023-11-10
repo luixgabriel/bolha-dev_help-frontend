@@ -11,6 +11,7 @@ import { decodedImage } from '../../utils/decode'
 
 const Header = () => {
   const [decode, setDecode] = useState<any>(null)
+  const [menuIsOpen, setMenuIsOPen] = useState<boolean>(false)
   const { setIsAuthenticated, isAuthenticated } = useAuth()
   const token = Cookies.get('token')
 
@@ -27,7 +28,7 @@ const Header = () => {
   }, [isAuthenticated])
 
   return (
-    <header className="w-screen px-3 py-3  flex items-center justify-between">
+    <header className="w-screen px-5 py-3  flex items-center justify-between">
       <Link href="/">
         <h1 className="font-black text-lg">bolha dev_help</h1>
       </Link>
@@ -42,11 +43,7 @@ const Header = () => {
         <Moon size={20} />
 
         {isAuthenticated ? (
-          <Profile
-            imageUrl={
-              decode ? decodedImage(decode.imageUrl) : decodedImage(null)
-            }
-          />
+          <Profile imageUrl={decode ? decodedImage(decode.imageUrl) : '...'} />
         ) : (
           <span className="text-md font-base scursor-pointer">
             <Link href="/login">Entrar</Link>
