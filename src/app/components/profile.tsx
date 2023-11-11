@@ -3,7 +3,11 @@ import defaultImg from '../../assets/imgs/null.png'
 import Cookies from 'js-cookie'
 import { useEffect, useRef, useState } from 'react'
 
-const Profile = ({ imageUrl }: { imageUrl: string | null }) => {
+interface IProfileProps {
+  imageUrl: string | null
+  name: string
+}
+const Profile = (props: IProfileProps) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -32,7 +36,7 @@ const Profile = ({ imageUrl }: { imageUrl: string | null }) => {
       className="flex items-center gap-3 text-left cursor-pointer"
     >
       <Image
-        src={imageUrl ? (imageUrl as string) : defaultImg}
+        src={props.imageUrl ? (props.imageUrl as string) : defaultImg}
         width={40}
         height={40}
         alt=""
@@ -41,8 +45,11 @@ const Profile = ({ imageUrl }: { imageUrl: string | null }) => {
       {menuIsOpen && (
         <div
           ref={menuRef}
-          className="absolute right-3 top-[54px] mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10"
+          className="absolute right-4 top-[54px] mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10"
         >
+          <p className="block w-full text-right px-4 py-1 text-sm border-b-2 text-gray-400 hover:bg-gray-100">
+            {props.name}
+          </p>
           <div>
             <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Publicar Nova Dúvida

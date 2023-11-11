@@ -8,9 +8,10 @@ import Profile from './profile'
 import { useAuth } from '../../hooks/useAuth'
 import axios from '../../services/axios'
 import { decodedImage } from '../../utils/decode'
+import { IDecoded } from '../../types/decoded'
 
 const Header = () => {
-  const [decode, setDecode] = useState<any>(null)
+  const [decode, setDecode] = useState<IDecoded | null>(null)
   const { setIsAuthenticated, isAuthenticated } = useAuth()
   const token = Cookies.get('token')
 
@@ -25,6 +26,8 @@ const Header = () => {
 
     getDecodeToken()
   }, [isAuthenticated])
+
+  console.log(decode)
 
   return (
     <header className="w-screen px-5 py-4  flex items-center justify-between">
@@ -44,8 +47,11 @@ const Header = () => {
         {isAuthenticated ? (
           <Profile
             imageUrl={
-              decode ? decodedImage(decode.imageUrl) : decodedImage(null)
+              decode
+                ? decodedImage(decode.imageUrl as string)
+                : decodedImage(null)
             }
+            name={decode?.name ? decode.name : '...'}
           />
         ) : (
           <span className="text-md font-base scursor-pointer">
