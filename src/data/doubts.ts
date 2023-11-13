@@ -1,4 +1,6 @@
-const doubts = [
+import { IDoubts } from '../types/doubts'
+
+const doubts: IDoubts[] = [
   {
     id: '6bfd11ac-10db-49ea-8750-6205ca87e1f2',
     title: 'Como subir uma api no render',
@@ -10,7 +12,7 @@ const doubts = [
       name: 'Luis Gabriel',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
     },
-    Answers: [],
+    Answers: [1, 2, 3],
   },
   {
     id: '1a2b3c4d-5e6f-7a8b-9c0d',
@@ -23,7 +25,7 @@ const doubts = [
       name: 'Ana Silva',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
     },
-    Answers: [],
+    Answers: [1, 2],
   },
   {
     id: 'abcd1234-5678ef90-1234ab56-cdef7890',
@@ -36,7 +38,7 @@ const doubts = [
       name: 'João Rodrigues',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
     },
-    Answers: [],
+    Answers: [1, 2, 3, 4, 5],
   },
   {
     id: '87654321-abcd5678-ef901234-abcd5678',
@@ -49,20 +51,22 @@ const doubts = [
       name: 'Maria Santos',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
     },
-    Answers: [],
+    Answers: [1, 2, 3, 6],
   },
   {
     id: 'abcd9876-5432dcba-1234ef56-7890abcd',
-    title: 'Configurando um banco de dados',
+    title:
+      'Configurando um banco de dados, Siga esse video explicando para saber melhor sobre isso',
     category: 'Database',
     image: null,
-    description: 'Como configurar um banco de dados SQL?',
+    description:
+      'Como configurar um banco de dados SQL? Siga esse video explicando para saber melhor sobre isso',
     createdAt: '2023-11-01T22:30:45.789Z',
     user: {
       name: 'Pedro Menezes',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
     },
-    Answers: [],
+    Answers: [1, 2, 3, 6, 7, 8],
   },
   {
     id: '1234abcd-5678ef90-abcd1234-5678ef90',
@@ -76,7 +80,7 @@ const doubts = [
       name: 'Sofia Lima',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
     },
-    Answers: [],
+    Answers: [1, 2, 3, 6, 7, 8, 9, 8, 7, 4],
   },
   {
     id: '56781234-abcd5678-ef901234-5678abcd',
@@ -113,7 +117,7 @@ const doubts = [
     createdAt: '2023-11-01T23:10:45.123Z',
     user: {
       name: 'Isabela Rodrigues',
-      imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
+      imageUrl: null,
     },
     Answers: [],
   },
@@ -131,3 +135,5 @@ const doubts = [
     Answers: [],
   },
 ]
+
+export default doubts
