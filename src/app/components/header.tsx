@@ -27,8 +27,6 @@ const Header = () => {
     getDecodeToken()
   }, [isAuthenticated])
 
-  console.log(decode)
-
   return (
     <header className="w-screen px-5 py-4  flex items-center justify-between">
       <Link href="/">

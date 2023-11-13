@@ -5,7 +5,7 @@ interface HomeContainerProps {
 }
 
 const HomeContainer = ({ children }: HomeContainerProps) => {
-  return <div className="w-screen h-screen flex justify-center">{children}</div>
+  return <div className="w-screen flex justify-center">{children}</div>
 }
 
 export default HomeContainer
