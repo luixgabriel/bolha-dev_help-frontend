@@ -6,10 +6,16 @@ import truncateText from '../../utils/truncateText'
 import defaultImg from '../../assets/imgs/null.png'
 import orderRelevantDoubts from '../../utils/orderRelevantDoubts'
 import { useDoubtsData } from '../../hooks/useDoubts'
+import { useRouter } from 'next/navigation'
 
 const DoubtsList = () => {
   const { data, isLoading } = useDoubtsData()
   const screenWidht = useWindowSize()
+  const router = useRouter()
+
+  const handleNavigate = (id: string) => {
+    router.push(`/doubts?id=${id}`)
+  }
 
   return (
     <div className="w-screen flex justify-center items-center flex-col">
@@ -41,7 +47,10 @@ const DoubtsList = () => {
               <MessageSquare />
               {item.Answers ? item.Answers.length : item.Answers}
             </span>
-            <ArrowRight />
+            <ArrowRight
+              onClick={() => handleNavigate(item.id)}
+              className="cursor-pointer"
+            />
           </div>
         ))
       )}

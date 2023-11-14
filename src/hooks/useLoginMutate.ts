@@ -3,7 +3,6 @@ import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { loginData } from '../services/requests'
-import { useAuth } from './useAuth'
 
 export function useLoginDataMutate() {
   const router = useRouter()
@@ -17,7 +16,7 @@ export function useLoginDataMutate() {
     },
     onError: (error) => {
       console.log(error)
-      toast.error('Erro ao tentar se cadastrar!')
+      toast.error('Erro ao fazer login!')
     },
   })
 

@@ -1,3 +1,5 @@
+import { IAnswers } from './answers'
+
 export interface IDoubts {
   id: string
   title: string
@@ -9,5 +11,5 @@ export interface IDoubts {
     name: string
     imageUrl: string | null
   }
-  Answers?: number[]
+  Answers?: number[] | IAnswers[]
 }

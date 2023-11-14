@@ -22,7 +22,7 @@ const doubts: IDoubts[] = [
     description: 'Quero aprender a desenvolver um aplicativo móvel.',
     createdAt: '2023-11-01T22:00:00.000Z',
     user: {
-      name: 'Ana Silva',
+      name: 'luix gabriel',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
     },
     Answers: [1, 2],

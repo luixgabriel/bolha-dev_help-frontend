@@ -12,4 +12,14 @@ const loginData = async (data: LoginData) => {
   return response.data
 }
 
-export { registerData, loginData }
+const fetchDoubts = async () => {
+  const response = await axios.get('/doubts')
+  return response
+}
+
+const fetchDoubtById = async (id: string) => {
+  const response = await axios.get(`/doubts/${id}`)
+  return response
+}
+
+export { registerData, loginData, fetchDoubts, fetchDoubtById }

@@ -1,14 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from '../services/axios'
-
-const fetchData = async () => {
-  const response = axios.get('/doubts')
-  return response
-}
+import { fetchDoubts } from '../services/requests'
 
 export function useDoubtsData() {
   const query = useQuery({
-    queryFn: fetchData,
+    queryFn: fetchDoubts,
     queryKey: ['doubts-data'],
     retry: 2,
   })
