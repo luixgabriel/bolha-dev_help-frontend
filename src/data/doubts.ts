@@ -33,7 +33,7 @@ const doubts: IDoubts[] = [
     category: 'Web Development',
     image: null,
     description: 'Preciso de ajuda para configurar um servidor web.',
-    createdAt: '2023-11-01T22:10:15.123Z',
+    createdAt: '2023-05-01T22:10:15.123Z',
     user: {
       name: 'João Rodrigues',
       imageUrl: 'https://avatars.githubusercontent.com/u/70019908?v=4',
