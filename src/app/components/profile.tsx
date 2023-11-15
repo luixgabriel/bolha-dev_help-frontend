@@ -57,6 +57,9 @@ const Profile = (props: IProfileProps) => {
             <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Minhas Dúvidas
             </span>
+            <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Minhas Respostas
+            </span>
             <span
               onClick={() => logout()}
               className="block w-full text-left px-4 py-2 text-sm text-red-600  border-t-1 bg-slate-200 hover:text-red-400"

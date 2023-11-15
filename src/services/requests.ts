@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { LoginData } from '../types/login-schema'
 import { RegisterData } from '../types/register-schema'
 import axios from './axios'
@@ -22,4 +23,21 @@ const fetchDoubtById = async (id: string) => {
   return response
 }
 
-export { registerData, loginData, fetchDoubts, fetchDoubtById }
+const createAnswer = async (data: {
+  description: string
+  doubtsId: string
+  userId?: string
+}) => {
+  const token = Cookies.get('token')
+  const userId = Cookies.get('userId')
+  if (userId) data = { ...data, userId }
+  const response = await axios.post('answers/', data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  })
+  return response
+}
+
+export { registerData, loginData, fetchDoubts, fetchDoubtById, createAnswer }

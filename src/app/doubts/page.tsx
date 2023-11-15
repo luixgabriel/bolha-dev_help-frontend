@@ -12,19 +12,10 @@ import defaultImg from '../../assets/imgs/null.png'
 import { useDoubtsDataById } from '../../hooks/useDoubtsById'
 import DoubtContent from '../components/doubt-content'
 import LoadingScreen from '../components/containers/loading-screen'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useAuth } from '../../hooks/useAuth'
-import { toast } from 'react-toastify'
+import TextAreaAnswer from '../components/textarea-answer'
 
 const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
-  const { isAuthenticated } = useAuth()
   const { data, isLoading } = useDoubtsDataById(searchParams.id)
-  const { register, handleSubmit } = useForm<{ answer: string }>()
-  const onSubmit: SubmitHandler<{ answer: string }> = (data) => {
-    if (!isAuthenticated)
-      return toast.error('Você precisa estar logado para enviar uma resposta!')
-    alert(data.answer)
-  }
   if (isLoading) {
     return <LoadingScreen />
   }
@@ -56,22 +47,7 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
         title={data.title}
         image={data.image as string}
       />
-      <div className="block w-[95%] self-center">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <textarea
-            {...register('answer')}
-            placeholder="Responder"
-            className="block w-[95%] rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black focus:ring-2 focus:ring-inset"
-          />
-          <span
-            className="flex items-center gap-2 my-2 cursor-pointer"
-            onClick={() => handleSubmit(onSubmit)()}
-          >
-            Enviar <SendHorizontalIcon size={18} />
-          </span>
-        </form>
-      </div>
-
+      <TextAreaAnswer doubtsId={data.id} />
       <div className="p-2 mt-1 mx-1 flex gap-2">
         <MessagesSquare />
         <span>{data.Answers?.length} Respostas</span>
@@ -92,7 +68,6 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
                       locale: ptBR,
                     })}
                   </span>
-                  <div className="h-[1px] bg-black w-full" />
                 </div>
                 <span className="flex gap-2 m-3">
                   {item.likes}
@@ -105,10 +80,7 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
                 placeholder="Responder"
                 className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
-              <span
-                className="flex items-center gap-2 my-2  cursor-pointer"
-                onClick={() => handleSubmit(onSubmit)()}
-              >
+              <span className="flex items-center gap-2 my-2  cursor-pointer">
                 Enviar <SendHorizontalIcon size={18} />
               </span>
               <div className="flex gap-2 mt-4 mb-3 mx-1">

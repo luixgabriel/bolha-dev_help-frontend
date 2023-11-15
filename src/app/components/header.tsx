@@ -14,16 +14,17 @@ const Header = () => {
   const [decode, setDecode] = useState<IDecoded | null>(null)
   const { setIsAuthenticated, isAuthenticated } = useAuth()
   const token = Cookies.get('token')
+  const userId = Cookies.get('userId')
 
   useEffect(() => {
     async function getDecodeToken() {
       if (token) {
         const response = await axios.post('/api/auth/github/user', { token })
         setDecode(response.data)
+        if (!userId) Cookies.set('userId', response.data.id)
         setIsAuthenticated(true)
       }
     }
-
     getDecodeToken()
   }, [isAuthenticated])
 
