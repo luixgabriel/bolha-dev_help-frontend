@@ -5,6 +5,7 @@ import Image from 'next/image'
 import {
   CircuitBoard,
   CornerDownRight,
+  CornerDownRightIcon,
   CornerLeftDown,
   MessagesSquare,
   ThumbsUp,
@@ -62,10 +63,13 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
       </div>
       <div className="w-[95%] mx-auto">
         {answers.map((item: IAnswers, index) => (
-          <div key={index} className="shadow-md rounded-md m-3">
+          <div
+            key={index}
+            className="shadow-md px-2 rounded-md mx-3 mb-7 mt-3 "
+          >
             <div className="flex px-2 justify-between">
               <div className="mb-3">
-                <h1>{item.user.name}</h1>
+                <h1 className="font-bold">{item.user.name}</h1>
                 <span className="text-xs overflow-y-hidden">
                   {formatDistanceToNow(new Date(item.createdAt), {
                     addSuffix: true,
@@ -87,10 +91,37 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
               conteúdo como texto, imagens, links, formulários e outros
               elementos.
             </p>
-            <div className="flex justify-center gap-5 my-3">
-              <span>Curtir</span>
-              <span>Comentar</span>
-              <span>Enviar mensagem</span>
+            <input
+              type="text"
+              placeholder="Responder"
+              className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
+            />
+            <div className="flex gap-2 my-3 mx-1">
+              <button className="bg-black text-sm text-white py-1 px-4 rounded-md">
+                Curtir
+              </button>
+              <button className="bg-gray-500 text-sm text-white py-1 px-4 rounded-md">
+                Enviar mensagem
+              </button>
+            </div>
+            <div className="flex flex-col py-2">
+              <div className="flex mx-1 gap-2">
+                {' '}
+                <CornerDownRightIcon />
+                <div>
+                  <h1 className="text-sm font-semibold">{item.user.name}</h1>
+                  <span className="text-xs overflow-y-hidden">
+                    {formatDistanceToNow(new Date(item.createdAt), {
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                  </span>
+                </div>
+              </div>
+              <span className="ml-7 mt-1 w-[90%] mb-4 border border-gray-500 rounded-lg p-2">
+                é a linguagem padrão utilizada para criar páginas web. Foi
+                desenvolvida para ser interpretada por navegadores web,
+              </span>
             </div>
           </div>
         ))}
