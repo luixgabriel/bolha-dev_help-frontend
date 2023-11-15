@@ -4,13 +4,11 @@ import { ptBR } from 'date-fns/locale'
 import Image from 'next/image'
 import {
   CircuitBoard,
-  CornerDownRight,
   CornerDownRightIcon,
-  CornerLeftDown,
   MessagesSquare,
   ThumbsUp,
 } from 'lucide-react'
-import testImg from '../../assets/imgs/carbon.png'
+
 import doubts from '../../data/doubts'
 import { useDoubtsDataById } from '../../hooks/useDoubtsById'
 import answers from '../../data/answers'
@@ -39,7 +37,7 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
         </div>
         <span>{formatDate}</span>
       </div>
-      <div className="mt-2 p-2 w-screen">
+      <div className="mt-2 p-3 w-screen">
         <span className="text-sm text-gray-400 pl-1 flex items-center gap-1">
           <CircuitBoard /> {exampleDoubt.category}
         </span>
@@ -55,9 +53,9 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
       </div>
       <textarea
         placeholder="Responder"
-        className="block w-[95%] self-center rounded-md border-0 mt-3 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
+        className="block w-[95%] self-center rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
       />
-      <div className="p-2 mt-3 mx-1 flex gap-2">
+      <div className="p-2 mt-1 mx-1 flex gap-2">
         <MessagesSquare />
         <span>50 Respostas</span>
       </div>
