@@ -2,7 +2,12 @@
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Image from 'next/image'
-import { CornerDownRightIcon, MessagesSquare, ThumbsUp } from 'lucide-react'
+import {
+  CornerDownRightIcon,
+  MessagesSquare,
+  SendHorizontalIcon,
+  ThumbsUp,
+} from 'lucide-react'
 import defaultImg from '../../assets/imgs/null.png'
 import doubts from '../../data/doubts'
 import { useDoubtsDataById } from '../../hooks/useDoubtsById'
@@ -10,9 +15,15 @@ import answers from '../../data/answers'
 import { IAnswers } from '../../types/answers'
 import DoubtContent from '../components/doubt-content'
 import LoadingScreen from '../components/containers/loading-screen'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const { data, isLoading } = useDoubtsDataById(searchParams.id)
+  const { register, handleSubmit } = useForm<{ answer: string }>()
+  const onSubmit: SubmitHandler<{ answer: string }> = (data) => {
+    // Faça algo com os dados (data)
+    alert(data.answer)
+  }
   // const exampleDoubt = doubts[3]
   if (isLoading) {
     return <LoadingScreen />
@@ -45,10 +56,22 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
         title={data.title}
         image={data.image as string}
       />
-      <textarea
-        placeholder="Responder"
-        className="block w-[95%] self-center rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
-      />
+      <div className="block w-[95%] self-center">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <textarea
+            {...register('answer')} // Adicione um nome (neste exemplo, 'resposta') para identificar o campo no objeto de dados
+            placeholder="Responder"
+            className="block w-[95%] rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black focus:ring-2 focus:ring-inset"
+          />
+          <span
+            className="flex items-center gap-2 my-2 gap-2 cursor-pointer"
+            onClick={() => handleSubmit(onSubmit)()}
+          >
+            Enviar <SendHorizontalIcon size={18} />
+          </span>
+        </form>
+      </div>
+
       <div className="p-2 mt-1 mx-1 flex gap-2">
         <MessagesSquare />
         <span>{data.Answers?.length} Respostas</span>
