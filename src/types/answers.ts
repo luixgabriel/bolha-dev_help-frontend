@@ -16,3 +16,12 @@ export interface IAnswers {
   }
   Comment?: string[]
 }
+
+export interface IAnswersInDoubts {
+  description: string
+  likes: number
+  createdAt: string
+  user: {
+    name: string
+  }
+}

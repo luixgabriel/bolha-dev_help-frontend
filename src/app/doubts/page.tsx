@@ -9,22 +9,22 @@ import {
   ThumbsUp,
 } from 'lucide-react'
 import defaultImg from '../../assets/imgs/null.png'
-import doubts from '../../data/doubts'
 import { useDoubtsDataById } from '../../hooks/useDoubtsById'
-import answers from '../../data/answers'
-import { IAnswers } from '../../types/answers'
 import DoubtContent from '../components/doubt-content'
 import LoadingScreen from '../components/containers/loading-screen'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useAuth } from '../../hooks/useAuth'
+import { toast } from 'react-toastify'
 
 const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
+  const { isAuthenticated } = useAuth()
   const { data, isLoading } = useDoubtsDataById(searchParams.id)
   const { register, handleSubmit } = useForm<{ answer: string }>()
   const onSubmit: SubmitHandler<{ answer: string }> = (data) => {
-    // Faça algo com os dados (data)
+    if (!isAuthenticated)
+      return toast.error('Você precisa estar logado para enviar uma resposta!')
     alert(data.answer)
   }
-  // const exampleDoubt = doubts[3]
   if (isLoading) {
     return <LoadingScreen />
   }
@@ -59,12 +59,12 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
       <div className="block w-[95%] self-center">
         <form onSubmit={handleSubmit(onSubmit)}>
           <textarea
-            {...register('answer')} // Adicione um nome (neste exemplo, 'resposta') para identificar o campo no objeto de dados
+            {...register('answer')}
             placeholder="Responder"
             className="block w-[95%] rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black focus:ring-2 focus:ring-inset"
           />
           <span
-            className="flex items-center gap-2 my-2 gap-2 cursor-pointer"
+            className="flex items-center gap-2 my-2 cursor-pointer"
             onClick={() => handleSubmit(onSubmit)()}
           >
             Enviar <SendHorizontalIcon size={18} />
@@ -78,9 +78,9 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
       </div>
       {(data.Answers?.length as number) > 0 && (
         <div className="w-[95%] mx-auto">
-          {answers.map((item: IAnswers, index) => (
+          {data.Answers?.map((item: any) => (
             <div
-              key={index}
+              key={item.id}
               className="shadow-md px-2 rounded-md mx-3 mb-7 mt-3 "
             >
               <div className="flex px-2 justify-between">
@@ -99,20 +99,19 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   <ThumbsUp size={20} />
                 </span>
               </div>
-              <p className="px-1 my-2 mb-3">
-                HTML, que significa HyperText Markup Language (Linguagem de
-                Marcação de Hipertexto, em português), é a linguagem padrão
-                utilizada para criar páginas web. Foi desenvolvida para ser
-                interpretada por navegadores web, permitindo a estruturação de
-                conteúdo como texto, imagens, links, formulários e outros
-                elementos.
-              </p>
+              <p className="px-1 my-2 mb-3">{item.description}</p>
               <input
                 type="text"
                 placeholder="Responder"
                 className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
-              <div className="flex gap-2 my-3 mx-1">
+              <span
+                className="flex items-center gap-2 my-2  cursor-pointer"
+                onClick={() => handleSubmit(onSubmit)()}
+              >
+                Enviar <SendHorizontalIcon size={18} />
+              </span>
+              <div className="flex gap-2 mt-4 mb-3 mx-1">
                 <button className="bg-black text-sm text-white py-1 px-4 rounded-md">
                   Curtir
                 </button>
@@ -120,25 +119,29 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   Enviar mensagem
                 </button>
               </div>
-              <div className="flex flex-col py-2">
-                <div className="flex mx-1 gap-2">
-                  {' '}
-                  <CornerDownRightIcon />
-                  <div>
-                    <h1 className="text-sm font-semibold">{item.user.name}</h1>
-                    <span className="text-xs overflow-y-hidden">
-                      {formatDistanceToNow(new Date(item.createdAt), {
-                        addSuffix: true,
-                        locale: ptBR,
-                      })}
-                    </span>
+              {item.Comment && item.Comment.length > 0 && (
+                <div className="flex flex-col py-2">
+                  <div className="flex mx-1 gap-2">
+                    {' '}
+                    <CornerDownRightIcon />
+                    <div>
+                      <h1 className="text-sm font-semibold">
+                        {item.user.name}
+                      </h1>
+                      <span className="text-xs overflow-y-hidden">
+                        {formatDistanceToNow(new Date(item.createdAt), {
+                          addSuffix: true,
+                          locale: ptBR,
+                        })}
+                      </span>
+                    </div>
                   </div>
+                  <span className="ml-7 mt-1 w-[90%] mb-4 border border-gray-500 rounded-lg p-2">
+                    é a linguagem padrão utilizada para criar páginas web. Foi
+                    desenvolvida para ser interpretada por navegadores web,
+                  </span>
                 </div>
-                <span className="ml-7 mt-1 w-[90%] mb-4 border border-gray-500 rounded-lg p-2">
-                  é a linguagem padrão utilizada para criar páginas web. Foi
-                  desenvolvida para ser interpretada por navegadores web,
-                </span>
-              </div>
+              )}
             </div>
           ))}
         </div>
