@@ -5,7 +5,7 @@ import { IDoubts } from '../types/doubts'
 export function useDoubtsDataById(id: string) {
   const query = useQuery({
     queryFn: () => fetchDoubtById(id),
-    queryKey: ['doubts-data-by-id'],
+    queryKey: ['doubts-data-by-id', id],
     retry: 2,
   })
 

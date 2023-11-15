@@ -44,7 +44,10 @@ const DoubtsList = () => {
                 : item.title}
             </p>
             <span className="flex gap-1">
-              <MessageSquare />
+              <MessageSquare
+                onClick={() => handleNavigate(item.id)}
+                className="cursor-pointer"
+              />
               {item.Answers ? item.Answers.length : item.Answers}
             </span>
             <ArrowRight

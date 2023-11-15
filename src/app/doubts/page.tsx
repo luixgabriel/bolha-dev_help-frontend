@@ -2,32 +2,29 @@
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Image from 'next/image'
-import {
-  CircuitBoard,
-  CornerDownRightIcon,
-  MessagesSquare,
-  ThumbsUp,
-} from 'lucide-react'
-
+import { CornerDownRightIcon, MessagesSquare, ThumbsUp } from 'lucide-react'
+import defaultImg from '../../assets/imgs/null.png'
 import doubts from '../../data/doubts'
 import { useDoubtsDataById } from '../../hooks/useDoubtsById'
 import answers from '../../data/answers'
 import { IAnswers } from '../../types/answers'
-import { useEffect } from 'react'
+import DoubtContent from '../components/doubt-content'
+import LoadingScreen from '../components/containers/loading-screen'
 
 const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const { data, isLoading } = useDoubtsDataById(searchParams.id)
-  const exampleDoubt = doubts[3]
-
+  // const exampleDoubt = doubts[3]
   if (isLoading) {
-    return <h1>carregando</h1>
+    return <LoadingScreen />
   }
   return (
     <div className="w-screen  flex flex-col">
-      <div className="flex items-center gap-3 p-3 justify-between mt-4 w-[90%] shadow-md self-center rounded-md">
+      <div className="flex items-center gap-3 p-3 justify-between mt-4 w-[95%] shadow-md self-center rounded-md">
         <div className="flex items-center gap-3">
           <Image
-            src={data.user.imageUrl as string}
+            src={
+              data.user.imageUrl ? (data.user.imageUrl as string) : defaultImg
+            }
             width={50}
             height={50}
             alt="user-image"
@@ -42,22 +39,12 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
           })}
         </span>
       </div>
-      <div className="mt-2 p-3 w-screen">
-        <span className="text-sm text-gray-400 pl-1 flex items-center gap-1">
-          <CircuitBoard /> {data.category}
-        </span>
-        <div className=" mt-2">
-          <h1 className="font-bold text-xl pl-1">{data.title}</h1>
-          <p className="pl-1 mt-2 mb-5">{data.description}</p>
-          {data.image && (
-            <img
-              className="mx-auto w-[95%] rounded-md shadow-sm"
-              src={data.image}
-              alt="image-answer"
-            />
-          )}
-        </div>
-      </div>
+      <DoubtContent
+        category={data.category}
+        description={data.description}
+        title={data.title}
+        image={data.image as string}
+      />
       <textarea
         placeholder="Responder"
         className="block w-[95%] self-center rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
