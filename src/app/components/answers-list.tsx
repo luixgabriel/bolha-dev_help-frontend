@@ -50,6 +50,7 @@ const AnswersList = ({ answers }: any) => {
               <div className="flex gap-2 mt-4 mb-3 mx-1">
                 <button
                   onClick={() => likeMutate.mutate(item.id)}
+                  disabled={likeMutate.isPending}
                   className="bg-black text-sm text-white py-1 px-4 rounded-md hover:bg-gray-800 transition-all"
                 >
                   Curtir
