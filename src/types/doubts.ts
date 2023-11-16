@@ -1,4 +1,4 @@
-import { IAnswers } from './answers'
+import { IAnswers, IAnswersInDoubts } from './answers'
 
 export interface IDoubts {
   id: string
@@ -11,5 +11,5 @@ export interface IDoubts {
     name: string
     imageUrl: string | null
   }
-  Answers?: number[] | IAnswers[]
+  Answers?: IAnswersInDoubts[] | IAnswers[]
 }

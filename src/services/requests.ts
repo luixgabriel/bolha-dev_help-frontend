@@ -40,4 +40,16 @@ const createAnswer = async (data: {
   return response
 }
 
-export { registerData, loginData, fetchDoubts, fetchDoubtById, createAnswer }
+const likeAnswer = async (id: string) => {
+  const response = await axios.patch(`/answers/like/${id}`)
+  return response
+}
+
+export {
+  registerData,
+  loginData,
+  fetchDoubts,
+  fetchDoubtById,
+  createAnswer,
+  likeAnswer,
+}
