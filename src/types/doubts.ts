@@ -11,5 +11,5 @@ export interface IDoubts {
     name: string
     imageUrl: string | null
   }
-  Answers?: IAnswersInDoubts[] | IAnswers[]
+  Answers?: IAnswersInDoubts[] | IAnswers[] | number[]
 }
