@@ -20,7 +20,9 @@ const AnswersList = ({ answers }: any) => {
     retry: 2,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
-      setLoadingButton(null)
+      setTimeout(() => {
+        setLoadingButton(null)
+      }, 1800)
     },
   })
   useEffect(() => {
@@ -61,7 +63,7 @@ const AnswersList = ({ answers }: any) => {
                       <span className="ml-1">
                         <ThumbsUp
                           size={20}
-                          color={likedAnswers[item.id] ? '#0D5BF6' : undefined}
+                          color={likedAnswers[item.id] ? '#5AB9ED' : undefined}
                         />
                       </span>
                     </>
@@ -86,7 +88,7 @@ const AnswersList = ({ answers }: any) => {
                   disabled={likeMutate.isPending}
                   className={`py-1 px-4 rounded-md transition-all bg-black ${
                     likedAnswers[item.id]
-                      ? 'border border-blue-500 text-blue-500'
+                      ? 'border border-blue-300 text-blue-300 hover:bg-gray-800 '
                       : 'text-white hover:bg-gray-800'
                   }`}
                 >
