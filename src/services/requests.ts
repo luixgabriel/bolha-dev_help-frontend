@@ -41,7 +41,9 @@ const createAnswer = async (data: {
 }
 
 const likeAnswer = async (id: string) => {
-  const response = await axios.patch(`/answers/like/${id}`)
+  const userId = Cookies.get('userId')
+  const data = { userId }
+  const response = await axios.patch(`/answers/like/${id}`, data)
   return response
 }
 

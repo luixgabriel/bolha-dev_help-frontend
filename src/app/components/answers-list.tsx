@@ -1,24 +1,41 @@
-import { formatDistanceToNow } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
-import { CornerDownRightIcon, SendHorizontalIcon, ThumbsUp } from 'lucide-react'
-import React from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { formatDistanceToNow } from 'date-fns'
+import { CornerDownRightIcon, SendHorizontalIcon, ThumbsUp } from 'lucide-react'
+import { ptBR } from 'date-fns/locale'
+import Cookies from 'js-cookie'
 import { likeAnswer } from '../../services/requests'
+import { useEffect, useState } from 'react'
+import { IAnswersInDoubts } from '../../types/answers'
 
 const AnswersList = ({ answers }: any) => {
+  const userId = Cookies.get('userId')
+  const [likedAnswers, setLikedAnswers] = useState<{ [key: string]: boolean }>(
+    {},
+  )
   const queryClient = useQueryClient()
   const likeMutate = useMutation({
     mutationFn: likeAnswer,
     retry: 2,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
     },
   })
+  useEffect(() => {
+    const likedAnswersMap: { [key: string]: boolean } = {}
+    answers.forEach((item: IAnswersInDoubts) => {
+      if (item.usersLikeThisAnswer.includes(userId as string)) {
+        likedAnswersMap[item.id] = true
+      }
+    })
+    setLikedAnswers(likedAnswersMap)
+    console.log(likedAnswers)
+  }, [answers, userId])
+
   return (
     <>
       {(answers?.length as number) > 0 && (
         <div className="w-[95%] mx-auto">
-          {answers?.map((item: any) => (
+          {answers?.map((item: IAnswersInDoubts) => (
             <div
               key={item.id}
               className="shadow-md px-2 rounded-md mx-3 mb-7 mt-3 "
@@ -53,7 +70,7 @@ const AnswersList = ({ answers }: any) => {
                   disabled={likeMutate.isPending}
                   className="bg-black text-sm text-white py-1 px-4 rounded-md hover:bg-gray-800 transition-all"
                 >
-                  Curtir
+                  {likedAnswers[item.id] ? 'Descurtir' : 'Curtir'}
                 </button>
                 <button className="bg-zinc-500 text-sm text-white py-1 px-4 rounded-md">
                   Enviar mensagem

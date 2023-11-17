@@ -18,9 +18,12 @@ export interface IAnswers {
 }
 
 export interface IAnswersInDoubts {
+  id: string
   description: string
   likes: number
+  usersLikeThisAnswer: string[]
   createdAt: string
+  Comment: string[]
   user: {
     name: string
   }
