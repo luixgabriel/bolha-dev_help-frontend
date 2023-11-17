@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 import { LoginData } from '../types/login-schema'
 import { RegisterData } from '../types/register-schema'
 import axios from './axios'
+import { toast } from 'react-toastify'
 
 const registerData = async (data: RegisterData) => {
   const response = await axios.post('/auth/register', data)
@@ -41,14 +42,20 @@ const createAnswer = async (data: {
 }
 
 const likeAnswer = async (id: string) => {
+  const token = Cookies.get('token')
+  if (!token) return toast.error('Você precisa estar autenticado para isso.')
   const userId = Cookies.get('userId')
+  if (!userId) return toast.error('Você precisa estar autenticado para isso.')
   const data = { userId }
   const response = await axios.patch(`/answers/like/${id}`, data)
   return response
 }
 
 const dislikeAnswer = async (id: string) => {
+  const token = Cookies.get('token')
+  if (!token) return toast.error('Você precisa estar autenticado para isso.')
   const userId = Cookies.get('userId')
+  if (!userId) return toast.error('Você precisa estar autenticado para isso.')
   const data = { userId }
   const response = await axios.patch(`/answers/dislike/${id}`, data)
   return response

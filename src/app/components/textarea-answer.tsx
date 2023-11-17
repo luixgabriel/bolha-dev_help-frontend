@@ -14,14 +14,10 @@ const TextAreaAnswer = ({ doubtsId }: { doubtsId: string }) => {
   const { mutate, isPending } = useAnswerMutate()
   const onSubmit: SubmitHandler<{ description: string }> = (data) => {
     if (!isAuthenticated) {
-      console.log('oi')
-      return toast.error('Você precisa estar logado para enviar uma resposta!')
+      return toast.error('Você precisa estar autenticado para isso.')
     } else {
-      console.log('ai')
       const description = data.description
-      console.log(description)
       const createAnswer = { description, doubtsId }
-      console.log(createAnswer)
       mutate(createAnswer)
     }
   }

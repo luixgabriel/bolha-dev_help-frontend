@@ -7,9 +7,13 @@ import { dislikeAnswer, likeAnswer } from '../../services/requests'
 import { useEffect, useState } from 'react'
 import { IAnswersInDoubts } from '../../types/answers'
 import LoadingIcon from './icons/loading-icon'
+import { useAuth } from '../../hooks/useAuth'
 
 const AnswersList = ({ answers }: any) => {
   const userId = Cookies.get('userId')
+  const token = Cookies.get('token')
+  const { isAuthenticated } = useAuth()
+  console.log(isAuthenticated)
   const [likedAnswers, setLikedAnswers] = useState<{ [key: string]: boolean }>(
     {},
   )
@@ -20,9 +24,13 @@ const AnswersList = ({ answers }: any) => {
     retry: 2,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
-      setTimeout(() => {
+      if (token) {
+        setTimeout(() => {
+          setLoadingButton(null)
+        }, 1800)
+      } else {
         setLoadingButton(null)
-      }, 1800)
+      }
     },
   })
 
@@ -31,11 +39,16 @@ const AnswersList = ({ answers }: any) => {
     retry: 2,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
-      setTimeout(() => {
+      if (token) {
+        setTimeout(() => {
+          setLoadingButton(null)
+        }, 1800)
+      } else {
         setLoadingButton(null)
-      }, 1800)
+      }
     },
   })
+
   useEffect(() => {
     const likedAnswersMap: { [key: string]: boolean } = {}
     answers.forEach((item: IAnswersInDoubts) => {
@@ -97,6 +110,7 @@ const AnswersList = ({ answers }: any) => {
                     if (likedAnswers[item.id]) {
                       dislikeMutate.mutate(item.id)
                     } else {
+                      console.log('chamei')
                       likeMutate.mutate(item.id)
                     }
                   }}
