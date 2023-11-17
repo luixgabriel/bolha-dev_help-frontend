@@ -6,18 +6,21 @@ import Cookies from 'js-cookie'
 import { likeAnswer } from '../../services/requests'
 import { useEffect, useState } from 'react'
 import { IAnswersInDoubts } from '../../types/answers'
+import LoadingIcon from './icons/loading-icon'
 
 const AnswersList = ({ answers }: any) => {
   const userId = Cookies.get('userId')
   const [likedAnswers, setLikedAnswers] = useState<{ [key: string]: boolean }>(
     {},
   )
+  const [loadingButton, setLoadingButton] = useState<string | null>(null)
   const queryClient = useQueryClient()
   const likeMutate = useMutation({
     mutationFn: likeAnswer,
     retry: 2,
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
+      setLoadingButton(null)
     },
   })
   useEffect(() => {
@@ -28,7 +31,6 @@ const AnswersList = ({ answers }: any) => {
       }
     })
     setLikedAnswers(likedAnswersMap)
-    console.log(likedAnswers)
   }, [answers, userId])
 
   return (
@@ -51,8 +53,19 @@ const AnswersList = ({ answers }: any) => {
                   </span>
                 </div>
                 <span className="flex gap-2 m-3">
-                  {item.likes}
-                  <ThumbsUp size={20} />
+                  {loadingButton === item.id ? (
+                    <LoadingIcon />
+                  ) : (
+                    <>
+                      {item.likes}
+                      <span className="ml-1">
+                        <ThumbsUp
+                          size={20}
+                          color={likedAnswers[item.id] ? '#0D5BF6' : undefined}
+                        />
+                      </span>
+                    </>
+                  )}
                 </span>
               </div>
               <p className="px-1 my-2 mb-3">{item.description}</p>
@@ -66,9 +79,16 @@ const AnswersList = ({ answers }: any) => {
               </span>
               <div className="flex gap-2 mt-4 mb-3 mx-1">
                 <button
-                  onClick={() => likeMutate.mutate(item.id)}
+                  onClick={() => {
+                    setLoadingButton(item.id)
+                    likeMutate.mutate(item.id)
+                  }}
                   disabled={likeMutate.isPending}
-                  className="bg-black text-sm text-white py-1 px-4 rounded-md hover:bg-gray-800 transition-all"
+                  className={`py-1 px-4 rounded-md transition-all bg-black ${
+                    likedAnswers[item.id]
+                      ? 'border border-blue-500 text-blue-500'
+                      : 'text-white hover:bg-gray-800'
+                  }`}
                 >
                   {likedAnswers[item.id] ? 'Descurtir' : 'Curtir'}
                 </button>

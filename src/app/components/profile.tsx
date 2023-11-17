@@ -13,6 +13,7 @@ const Profile = (props: IProfileProps) => {
 
   const logout = () => {
     Cookies.remove('token')
+    Cookies.remove('userId')
     window.location.reload()
   }
   const handleOutsideClick = (event: MouseEvent) => {
