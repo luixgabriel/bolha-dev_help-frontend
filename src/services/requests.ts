@@ -47,6 +47,13 @@ const likeAnswer = async (id: string) => {
   return response
 }
 
+const dislikeAnswer = async (id: string) => {
+  const userId = Cookies.get('userId')
+  const data = { userId }
+  const response = await axios.patch(`/answers/dislike/${id}`, data)
+  return response
+}
+
 export {
   registerData,
   loginData,
@@ -54,4 +61,5 @@ export {
   fetchDoubtById,
   createAnswer,
   likeAnswer,
+  dislikeAnswer,
 }

@@ -3,7 +3,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { CornerDownRightIcon, SendHorizontalIcon, ThumbsUp } from 'lucide-react'
 import { ptBR } from 'date-fns/locale'
 import Cookies from 'js-cookie'
-import { likeAnswer } from '../../services/requests'
+import { dislikeAnswer, likeAnswer } from '../../services/requests'
 import { useEffect, useState } from 'react'
 import { IAnswersInDoubts } from '../../types/answers'
 import LoadingIcon from './icons/loading-icon'
@@ -17,6 +17,17 @@ const AnswersList = ({ answers }: any) => {
   const queryClient = useQueryClient()
   const likeMutate = useMutation({
     mutationFn: likeAnswer,
+    retry: 2,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
+      setTimeout(() => {
+        setLoadingButton(null)
+      }, 1800)
+    },
+  })
+
+  const dislikeMutate = useMutation({
+    mutationFn: dislikeAnswer,
     retry: 2,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
@@ -83,7 +94,11 @@ const AnswersList = ({ answers }: any) => {
                 <button
                   onClick={() => {
                     setLoadingButton(item.id)
-                    likeMutate.mutate(item.id)
+                    if (likedAnswers[item.id]) {
+                      dislikeMutate.mutate(item.id)
+                    } else {
+                      likeMutate.mutate(item.id)
+                    }
                   }}
                   disabled={likeMutate.isPending}
                   className={`py-1 px-4 rounded-md transition-all bg-black ${
