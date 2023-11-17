@@ -110,7 +110,6 @@ const AnswersList = ({ answers }: any) => {
                     if (likedAnswers[item.id]) {
                       dislikeMutate.mutate(item.id)
                     } else {
-                      console.log('chamei')
                       likeMutate.mutate(item.id)
                     }
                   }}
