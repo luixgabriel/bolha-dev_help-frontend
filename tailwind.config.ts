@@ -16,6 +16,9 @@ const config: Config = {
       fontWeight: {
         base: '600',
       },
+      backgroundColor: {
+        blak: '#121110',
+      },
     },
   },
   plugins: [],

@@ -8,7 +8,7 @@
 //         likeMutate.mutate(item.id)
 //       }}
 //       disabled={likeMutate.isPending}
-//       className={`py-1 px-4 rounded-md transition-all bg-black ${
+//       className={`py-1 px-4 rounded-md transition-all bg-blak ${
 //         likedAnswers[item.id]
 //           ? 'border border-blue-300 text-blue-300 hover:bg-gray-800 '
 //           : 'text-white hover:bg-gray-800'

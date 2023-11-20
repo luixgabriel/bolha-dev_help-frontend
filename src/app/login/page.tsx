@@ -52,11 +52,11 @@ const Login = () => {
       </Link>
 
       <div className="flex mt-6 items-center">
-        <div className="h-[1px] flex-grow bg-black"></div>
+        <div className="h-[1px] flex-grow bg-blak"></div>
         <p className="text-center text-sm font-base leading-5 text-gray-500  mx-4">
           Ou continue com
         </p>
-        <div className="h-[1px] flex-grow bg-black"></div>
+        <div className="h-[1px] flex-grow bg-blak"></div>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -107,7 +107,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-blak px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {isPending ? <LoadingIcon /> : 'Entrar'}
             </button>

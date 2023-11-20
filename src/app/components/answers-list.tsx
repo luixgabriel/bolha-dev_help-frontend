@@ -1,19 +1,18 @@
+import { useEffect, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { CornerDownRightIcon, SendHorizontalIcon, ThumbsUp } from 'lucide-react'
 import { ptBR } from 'date-fns/locale'
 import Cookies from 'js-cookie'
 import { dislikeAnswer, likeAnswer } from '../../services/requests'
-import { useEffect, useState } from 'react'
 import { IAnswersInDoubts } from '../../types/answers'
 import LoadingIcon from './icons/loading-icon'
-import { useAuth } from '../../hooks/useAuth'
+import CommentList from './comment-list'
+import InputComment from './input-comment'
 
 const AnswersList = ({ answers }: any) => {
   const userId = Cookies.get('userId')
   const token = Cookies.get('token')
-  const { isAuthenticated } = useAuth()
-  console.log(isAuthenticated)
   const [likedAnswers, setLikedAnswers] = useState<{ [key: string]: boolean }>(
     {},
   )
@@ -59,6 +58,10 @@ const AnswersList = ({ answers }: any) => {
     setLikedAnswers(likedAnswersMap)
   }, [answers, userId])
 
+  const functionTeste = (id: string) => {
+    console.log(id)
+  }
+
   return (
     <>
       {(answers?.length as number) > 0 && (
@@ -95,14 +98,18 @@ const AnswersList = ({ answers }: any) => {
                 </span>
               </div>
               <p className="px-1 my-2 mb-3">{item.description}</p>
-              <input
+              <InputComment answerId={item.id} />
+              {/* <input
                 type="text"
                 placeholder="Responder"
                 className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
               />
-              <span className="flex items-center gap-2 my-2  cursor-pointer">
+              <span
+                className="flex items-center gap-2 my-2  cursor-pointer"
+                onClick={() => functionTeste(item.id)}
+              >
                 Enviar <SendHorizontalIcon size={18} />
-              </span>
+              </span> */}
               <div className="flex gap-2 mt-4 mb-3 mx-1">
                 <button
                   onClick={() => {
@@ -114,10 +121,10 @@ const AnswersList = ({ answers }: any) => {
                     }
                   }}
                   disabled={likeMutate.isPending}
-                  className={`py-1 px-4 rounded-md transition-all bg-black ${
+                  className={`py-1 px-4 rounded-md transition-all bg-blak ${
                     likedAnswers[item.id]
-                      ? 'border border-blue-300 text-blue-300 hover:bg-gray-800 '
-                      : 'text-white hover:bg-gray-800'
+                      ? 'border border-blue-300 text-blue-300 hover:bg-blak '
+                      : 'text-white hover:bg-blak'
                   }`}
                 >
                   {likedAnswers[item.id] ? 'Descurtir' : 'Curtir'}
@@ -126,28 +133,9 @@ const AnswersList = ({ answers }: any) => {
                   Enviar mensagem
                 </button>
               </div>
+
               {item.Comment && item.Comment.length > 0 && (
-                <div className="flex flex-col py-2">
-                  <div className="flex mx-1 gap-2">
-                    {' '}
-                    <CornerDownRightIcon />
-                    <div>
-                      <h1 className="text-sm font-semibold">
-                        {item.user.name}
-                      </h1>
-                      <span className="text-xs overflow-y-hidden">
-                        {formatDistanceToNow(new Date(item.createdAt), {
-                          addSuffix: true,
-                          locale: ptBR,
-                        })}
-                      </span>
-                    </div>
-                  </div>
-                  <span className="ml-7 mt-1 w-[90%] mb-4 border border-gray-500 rounded-lg p-2">
-                    é a linguagem padrão utilizada para criar páginas web. Foi
-                    desenvolvida para ser interpretada por navegadores web,
-                  </span>
-                </div>
+                <CommentList comment={item.Comment} />
               )}
             </div>
           ))}
