@@ -58,10 +58,6 @@ const AnswersList = ({ answers }: any) => {
     setLikedAnswers(likedAnswersMap)
   }, [answers, userId])
 
-  const functionTeste = (id: string) => {
-    console.log(id)
-  }
-
   return (
     <>
       {(answers?.length as number) > 0 && (
@@ -91,6 +87,15 @@ const AnswersList = ({ answers }: any) => {
                         <ThumbsUp
                           size={20}
                           color={likedAnswers[item.id] ? '#5AB9ED' : undefined}
+                          onClick={() => {
+                            setLoadingButton(item.id)
+                            if (likedAnswers[item.id]) {
+                              dislikeMutate.mutate(item.id)
+                            } else {
+                              likeMutate.mutate(item.id)
+                            }
+                          }}
+                          className="cursor-pointer"
                         />
                       </span>
                     </>
@@ -110,8 +115,8 @@ const AnswersList = ({ answers }: any) => {
               >
                 Enviar <SendHorizontalIcon size={18} />
               </span> */}
-              <div className="flex gap-2 mt-4 mb-3 mx-1">
-                <button
+              <div className="flex gap-2 mt-2 mb-3 mx-1">
+                {/* <button
                   onClick={() => {
                     setLoadingButton(item.id)
                     if (likedAnswers[item.id]) {
@@ -128,7 +133,7 @@ const AnswersList = ({ answers }: any) => {
                   }`}
                 >
                   {likedAnswers[item.id] ? 'Descurtir' : 'Curtir'}
-                </button>
+                </button> */}
                 <button className="bg-zinc-500 text-sm text-white py-1 px-4 rounded-md">
                   Enviar mensagem
                 </button>
