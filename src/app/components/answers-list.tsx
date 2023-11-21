@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
-import { CornerDownRightIcon, SendHorizontalIcon, ThumbsUp } from 'lucide-react'
+import { ThumbsUp } from 'lucide-react'
 import { ptBR } from 'date-fns/locale'
 import Cookies from 'js-cookie'
 import { dislikeAnswer, likeAnswer } from '../../services/requests'

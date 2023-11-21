@@ -1,9 +1,64 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { CornerDownRightIcon, ThumbsUp } from 'lucide-react'
-import React from 'react'
+import { useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
+import { dislikeComment, likeComment } from '../../services/requests'
+import LoadingIcon from './icons/loading-icon'
 
 const CommentList = ({ comment }: any) => {
+  const token = Cookies.get('token')
+  const userId = Cookies.get('userId')
+  const [loadingButton, setLoadingButton] = useState<string | null>(null)
+  const [likedComments, setLikedComments] = useState<{
+    [key: string]: boolean
+  }>({})
+  const queryClient = useQueryClient()
+  const likeMutate = useMutation({
+    mutationFn: likeComment,
+    retry: 2,
+    onSuccess: (data, itemId) => {
+      console.log(itemId)
+      console.log(data)
+      queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
+      if (token) {
+        setTimeout(() => {
+          setLoadingButton(null)
+        }, 1800)
+      } else {
+        setLoadingButton(null)
+      }
+    },
+  })
+
+  const dislikeMutate = useMutation({
+    mutationFn: dislikeComment,
+    retry: 2,
+    onSuccess: (data, itemId) => {
+      console.log(itemId)
+      console.log(data)
+      queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
+      if (token) {
+        setTimeout(() => {
+          setLoadingButton(null)
+        }, 1800)
+      } else {
+        setLoadingButton(null)
+      }
+    },
+  })
+
+  useEffect(() => {
+    const likedCommentMap: { [key: string]: boolean } = {}
+    comment.forEach((item: any) => {
+      if (item.usersLikeThisComment.includes(userId as string)) {
+        likedCommentMap[item.id] = true
+      }
+    })
+    setLikedComments(likedCommentMap)
+  }, [comment, userId])
+
   return (
     <>
       {comment?.map((item: any) => (
@@ -22,8 +77,27 @@ const CommentList = ({ comment }: any) => {
                 </span>
               </div>
             </div>
-            <span className="ml-1 flex items-center gap-2">
-              10 <ThumbsUp className="cursor-pointer" size={18} />
+            <span className="ml-1 flex items-center gap-2 mr-5">
+              {loadingButton === item.id ? (
+                <LoadingIcon />
+              ) : (
+                <>
+                  {item.likes}{' '}
+                  <ThumbsUp
+                    className="cursor-pointer"
+                    color={likedComments[item.id] ? '#5AB9ED' : undefined}
+                    size={18}
+                    onClick={() => {
+                      setLoadingButton(item.id)
+                      if (likedComments[item.id]) {
+                        dislikeMutate.mutate(item.id)
+                      } else {
+                        likeMutate.mutate(item.id)
+                      }
+                    }}
+                  />
+                </>
+              )}
             </span>
           </div>
 

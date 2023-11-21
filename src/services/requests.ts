@@ -78,6 +78,28 @@ const createComment = async (data: {
   return response
 }
 
+const likeComment = async (id: string) => {
+  const token = Cookies.get('token')
+  if (!token) return toast.error('Você precisa estar autenticado para isso.')
+  const userId = Cookies.get('userId')
+  if (!userId) return toast.error('Você precisa estar autenticado para isso.')
+  const data = { userId }
+  const response = await axios.patch(`/comment/like/${id}`, data)
+
+  return response
+}
+
+const dislikeComment = async (id: string) => {
+  const token = Cookies.get('token')
+  if (!token) return toast.error('Você precisa estar autenticado para isso.')
+  const userId = Cookies.get('userId')
+  if (!userId) return toast.error('Você precisa estar autenticado para isso.')
+  const data = { userId }
+  const response = await axios.patch(`/comment/dislike/${id}`, data)
+  console.log(response)
+  return response
+}
+
 export {
   registerData,
   loginData,
@@ -87,4 +109,6 @@ export {
   likeAnswer,
   dislikeAnswer,
   createComment,
+  likeComment,
+  dislikeComment,
 }
