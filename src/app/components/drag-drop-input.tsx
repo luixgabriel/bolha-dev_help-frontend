@@ -62,11 +62,11 @@ const Input = ({ dropzone }: InputProps) => {
             </p>
           ) : (
             <>
-              <p className="mb-2 text-lg text-gray-700 sm:text-md p-2">
+              <p className="mb-2 text-lg text-gray-700 sm:text-md p-2 text-center">
                 <span className="font-bold ">Clique para enviar</span> ou
                 arraste até aqui
               </p>
-              <p className="text-gray-700 text-sm">pnj / jpeg</p>
+              <p className="text-gray-700 text-sm">pnj/jpeg</p>
             </>
           )}
         </div>
