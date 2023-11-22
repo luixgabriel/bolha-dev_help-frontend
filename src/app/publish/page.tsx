@@ -31,7 +31,7 @@ const Page = () => {
   const onSubmit = (data: DoubtData) => {
     const newData = { ...data, image }
     console.log(newData)
-    alert(newData.image.type)
+    if (newData) alert(newData?.image?.type)
     // mutate(newData)
   }
 
