@@ -31,7 +31,7 @@ export const FileInput = ({
   const dropzone = useDropzone({
     onDrop,
     accept: {
-      'image/png': ['.png', '.jpeg'],
+      'image/png': ['.png', '.jpeg', '.jpg'],
     },
   })
 
