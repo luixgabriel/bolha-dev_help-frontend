@@ -100,6 +100,23 @@ const dislikeComment = async (id: string) => {
   return response
 }
 
+const createDoubt = async (data: {
+  content: string
+  answerId: string
+  userId?: string
+}) => {
+  const token = Cookies.get('token')
+  const userId = Cookies.get('userId')
+  if (userId) data = { ...data, userId }
+  const response = await axios.post('comment', data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  })
+  return response
+}
+
 export {
   registerData,
   loginData,
@@ -111,4 +128,5 @@ export {
   createComment,
   likeComment,
   dislikeComment,
+  createDoubt,
 }

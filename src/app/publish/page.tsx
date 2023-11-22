@@ -21,6 +21,7 @@ const Page = () => {
     console.log('chamei')
     console.log('Arquivo selecionado:', file)
     setSelectedFile(file)
+    alert(file)
   }
 
   const onSubmit = (data: DoubtData) => {
