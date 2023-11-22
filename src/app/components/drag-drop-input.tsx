@@ -71,7 +71,7 @@ const Input = ({ dropzone }: InputProps) => {
           )}
         </div>
       </label>
-      <input {...getInputProps()} className="hidden" />
+      <input type="file" {...getInputProps()} className="hidden" />
     </div>
   )
 }
