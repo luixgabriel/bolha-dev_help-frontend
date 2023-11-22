@@ -22,18 +22,15 @@ const Page = () => {
     setValue('category', categoryList[0].name)
   }, [control])
   const { mutate, isPending } = useDoubtMutate()
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [image, setImage] = useState<File | null>(null)
 
   const handleFileChange = (file: File) => {
-    console.log('chamei')
-    console.log('Arquivo selecionado:', file)
-    setSelectedFile(file)
-    alert(file)
+    setImage(file)
   }
 
   const onSubmit = (data: DoubtData) => {
-    // const newData = { ...data, image: selectedFile }
-    // mutate(newData)
+    const newData = { ...data, image }
+    mutate(newData)
   }
 
   return (
