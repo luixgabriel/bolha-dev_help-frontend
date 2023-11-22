@@ -20,7 +20,7 @@ const Page = () => {
   })
   useEffect(() => {
     setValue('category', categoryList[0].name)
-  }, [control])
+  }, [])
   const { mutate, isPending } = useDoubtMutate()
   const [image, setImage] = useState<File | null>(null)
 
@@ -89,7 +89,7 @@ const Page = () => {
 
       <button
         type="submit"
-        className="bg-blak text-white px-4 py-2 rounded hover:bg-black w-full transition-all"
+        className="bg-blak text-white px-4 flex items-center justify-center py-2 rounded hover:bg-black w-full transition-all"
       >
         {isPending ? <LoadingIcon /> : 'Enviar'}
       </button>

@@ -47,7 +47,7 @@ const Input = ({ dropzone }: InputProps) => {
     <div
       onClick={open}
       {...getRootProps()}
-      className={`w-full h-full rounded-lg border-dashed border-4 mt-1 hover:border-gray-500 bg-gray-300 hover:bg-gray-400 transition-all
+      className={`w-full h-52 rounded-lg border-dashed border-4 mt-1 hover:border-gray-500 bg-gray-300 hover:bg-gray-400 transition-all
       ${isDragActive ? 'border-blue-500' : 'border-gray-600'}`}
     >
       <label htmlFor="dropzone-file" className="cursor-pointer w-full h-full">
