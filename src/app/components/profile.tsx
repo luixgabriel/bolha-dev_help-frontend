@@ -2,6 +2,7 @@ import Image from 'next/image'
 import defaultImg from '../../assets/imgs/null.png'
 import Cookies from 'js-cookie'
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 
 interface IProfileProps {
   imageUrl: string | null
@@ -52,9 +53,12 @@ const Profile = (props: IProfileProps) => {
             {props.name}
           </p>
           <div>
-            <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <Link
+              href="/publish"
+              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
               Publicar Nova Dúvida
-            </span>
+            </Link>
             <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Minhas Dúvidas
             </span>
