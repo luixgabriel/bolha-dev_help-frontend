@@ -33,6 +33,7 @@ export const FileInput = ({
     accept: {
       'image/png': ['.png', '.jpeg'],
     },
+    noClick: true,
   })
 
   if (file) return <HasFile file={file} removeFile={removeFile} />
@@ -41,10 +42,11 @@ export const FileInput = ({
 }
 
 const Input = ({ dropzone }: InputProps) => {
-  const { getRootProps, getInputProps, isDragActive } = dropzone
+  const { getRootProps, getInputProps, isDragActive, open } = dropzone
 
   return (
     <div
+      onClick={open}
       {...getRootProps()}
       className={`w-full h-full rounded-lg border-dashed border-4 mt-1 hover:border-gray-500 bg-gray-300 hover:bg-gray-400 transition-all
       ${isDragActive ? 'border-blue-500' : 'border-gray-600'}`}
