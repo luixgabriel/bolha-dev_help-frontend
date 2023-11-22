@@ -33,7 +33,6 @@ export const FileInput = ({
     accept: {
       'image/png': ['.png', '.jpeg'],
     },
-    noClick: true,
   })
 
   if (file) return <HasFile file={file} removeFile={removeFile} />
