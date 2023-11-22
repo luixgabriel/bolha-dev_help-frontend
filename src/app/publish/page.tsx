@@ -22,15 +22,17 @@ const Page = () => {
     setValue('category', categoryList[0].name)
   }, [])
   const { mutate, isPending } = useDoubtMutate()
-  const [image, setimage] = useState<File | null>(null)
+  const [image, setImage] = useState<File | null>(null)
 
   const handleFileChange = (file: File) => {
-    setimage(file)
+    setImage(file)
   }
 
   const onSubmit = (data: DoubtData) => {
     const newData = { ...data, image }
-    mutate(newData)
+    console.log(newData)
+    alert(newData.image.type)
+    // mutate(newData)
   }
 
   return (
