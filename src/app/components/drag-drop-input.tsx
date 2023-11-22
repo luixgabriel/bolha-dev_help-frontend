@@ -46,7 +46,7 @@ const Input = ({ dropzone }: InputProps) => {
   return (
     <div
       {...getRootProps()}
-      className={`w-full h-full rounded-lg border-dashed border-4 mt-2 hover:border-gray-500 bg-gray-300 hover:bg-gray-400 transition-all
+      className={`w-full h-full rounded-lg border-dashed border-4 mt-1 hover:border-gray-500 bg-gray-300 hover:bg-gray-400 transition-all
       ${isDragActive ? 'border-blue-500' : 'border-gray-600'}`}
     >
       <label htmlFor="dropzone-file" className="cursor-pointer w-full h-full">
@@ -62,11 +62,11 @@ const Input = ({ dropzone }: InputProps) => {
             </p>
           ) : (
             <>
-              <p className="mb-2 text-lg text-gray-700">
-                <span className="font-bold">Clique para enviar</span> ou arraste
-                até aqui
+              <p className="mb-2 text-lg text-gray-700 sm:text-md p-2">
+                <span className="font-bold ">Clique para enviar</span> ou
+                arraste até aqui
               </p>
-              <p className="text-gray-700 text-sm">PDF</p>
+              <p className="text-gray-700 text-sm">pnj / jpeg</p>
             </>
           )}
         </div>

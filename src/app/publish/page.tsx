@@ -3,20 +3,27 @@ import { useForm, Controller } from 'react-hook-form'
 import { FileInput } from '../components/drag-drop-input'
 import { useState } from 'react'
 import categoryList, { ICategory } from '../../data/categorys'
+import { DoubtData, doubtSchema } from '../../types/doubtSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const Page = () => {
-  const { handleSubmit, control, register } = useForm()
+  const {
+    handleSubmit,
+    control,
+    register,
+    formState: { errors },
+  } = useForm<DoubtData>({
+    resolver: zodResolver(doubtSchema),
+  })
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const handleFileChange = (file: File) => {
-    // Faça o que for necessário com o arquivo, por exemplo, enviar para o backend
     console.log('chamei')
     console.log('Arquivo selecionado:', file)
     setSelectedFile(file)
   }
 
-  const onSubmit = (data: any) => {
-    // Envie os dados para o backend aqui (substitua com sua lógica real)
+  const onSubmit = (data: DoubtData) => {
     console.log(selectedFile)
     console.log(data)
   }
@@ -24,16 +31,16 @@ const Page = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg mx-auto mt-8 bg-white p-8 shadow-md rounded"
+      className="max-w-lg mx-auto mt-4 bg-white p-8 shadow-md rounded"
     >
       <div className="mb-4">
         <label className="block text-gray-600">Título:</label>
         <input
-          {...register('titulo', { required: 'Campo obrigatório' })}
+          {...register('title', { required: 'Campo obrigatório' })}
           type="text"
           className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
         />
-        {/* <span className="text-red-500 text-sm">{errors.titulo?.message}</span> */}
+        <span className="text-red-500 text-sm">{errors.title?.message}</span>
       </div>
 
       <div className="mb-4">
@@ -52,23 +59,27 @@ const Page = () => {
             </select>
           )}
           control={control}
-          name="categoria"
+          name="category"
           rules={{ required: 'Campo obrigatório' }}
         />
-        {/* <span className="text-red-500 text-sm">{errors.categoria?.message}</span> */}
+        <span className="text-red-500 text-sm">{errors.category?.message}</span>
       </div>
 
       <div className="mb-4 ">
         <label className="block text-gray-600">Descrição:</label>
         <textarea
-          {...register('descricao', { required: 'Campo obrigatório' })}
+          {...register('description', { required: 'Campo obrigatório' })}
           rows={6}
           className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
         />
-        {/* <span className="text-red-500 text-sm">{errors.descricao?.message}</span> */}
+        <span className="text-red-500 text-sm">
+          {errors.description?.message}
+        </span>
       </div>
       <div className="my-4">
-        <span className="text-sm leading-3 pl-2">A imagem é opcional!</span>
+        <span className="text-sm leading-3 pl-2 text-gray-400">
+          A imagem é opcional!
+        </span>
         <FileInput onFileChanges={handleFileChange} />
       </div>
 
