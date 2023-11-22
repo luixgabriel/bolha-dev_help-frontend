@@ -80,7 +80,7 @@ const Input = ({ dropzone }: InputProps) => {
 const HasFile = ({ file, removeFile }: HasFileProps) => {
   return (
     <div className="w-full h-full rounded-lg border-dashed border-4 border-gray-600 bg-gray-700 flex justify-center items-center">
-      <div className="bg-white w-36 rounded-md shadow-md flex gap-3 items-center justify-center">
+      <div className="bg-white w-1/2 rounded-md shadow-md flex gap-3 p-4 items-center justify-center">
         <FileIcon className="w-5 h-5 my-4 ml-4" />
         <span className="text-sm text-gray-500 my-4">{file?.name}</span>
         <button

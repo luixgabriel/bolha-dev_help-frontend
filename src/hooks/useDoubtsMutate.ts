@@ -9,11 +9,11 @@ export function useDoubtMutate() {
     retry: 2,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data'] })
-      toast.success('Resposta enviada.')
+      toast.success('Dúvida criada com sucesso.')
     },
     onError: (error) => {
       console.log(error)
-      toast.error('Erro ao criar resposta.')
+      toast.error('Erro ao criar a dúvida, Tente novamente.')
     },
   })
 

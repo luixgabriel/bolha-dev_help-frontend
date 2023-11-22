@@ -1,32 +1,36 @@
 'use client'
 import { useForm, Controller } from 'react-hook-form'
 import { FileInput } from '../components/drag-drop-input'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import categoryList, { ICategory } from '../../data/categorys'
 import { DoubtData, doubtSchema } from '../../types/doubtSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useDoubtMutate } from '../../hooks/useDoubtsMutate'
+import LoadingIcon from '../components/icons/loading-icon'
 
 const Page = () => {
   const {
     handleSubmit,
     control,
+    setValue,
     register,
     formState: { errors },
   } = useForm<DoubtData>({
     resolver: zodResolver(doubtSchema),
   })
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  useEffect(() => {
+    setValue('category', categoryList[0].name)
+  }, [])
+  const { mutate, isPending } = useDoubtMutate()
+  const [image, setimage] = useState<File | null>(null)
 
   const handleFileChange = (file: File) => {
-    console.log('chamei')
-    console.log('Arquivo selecionado:', file)
-    setSelectedFile(file)
-    alert(file)
+    setimage(file)
   }
 
   const onSubmit = (data: DoubtData) => {
-    console.log(selectedFile)
-    console.log(data)
+    const newData = { ...data, image }
+    mutate(newData)
   }
 
   return (
@@ -50,6 +54,7 @@ const Page = () => {
           render={({ field }) => (
             <select
               {...field}
+              defaultValue={categoryList[0].name}
               className="form-select mt-1 block w-full p-2 border rounded-md shadow-sm"
             >
               {categoryList.map((item: ICategory) => (
@@ -61,9 +66,7 @@ const Page = () => {
           )}
           control={control}
           name="category"
-          rules={{ required: 'Campo obrigatório' }}
         />
-        <span className="text-red-500 text-sm">{errors.category?.message}</span>
       </div>
 
       <div className="mb-4 ">
@@ -88,7 +91,7 @@ const Page = () => {
         type="submit"
         className="bg-blak text-white px-4 py-2 rounded hover:bg-black w-full transition-all"
       >
-        Enviar
+        {isPending ? <LoadingIcon /> : 'Enviar'}
       </button>
     </form>
   )
