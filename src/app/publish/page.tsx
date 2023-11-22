@@ -20,18 +20,19 @@ const Page = () => {
   })
   useEffect(() => {
     setValue('category', categoryList[0].name)
-  }, [])
+  }, [control])
   const { mutate, isPending } = useDoubtMutate()
-  const [image, setImage] = useState<File | null>(null)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const handleFileChange = (file: File) => {
-    setImage(file)
+    console.log('chamei')
+    console.log('Arquivo selecionado:', file)
+    setSelectedFile(file)
+    alert(file)
   }
 
   const onSubmit = (data: DoubtData) => {
-    const newData = { ...data, image }
-    console.log(newData)
-    if (newData) alert(newData?.image?.type)
+    // const newData = { ...data, image: selectedFile }
     // mutate(newData)
   }
 
