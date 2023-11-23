@@ -2,12 +2,7 @@
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Image from 'next/image'
-import {
-  CornerDownRightIcon,
-  MessagesSquare,
-  SendHorizontalIcon,
-  ThumbsUp,
-} from 'lucide-react'
+import { MessagesSquare } from 'lucide-react'
 import defaultImg from '../../assets/imgs/null.png'
 import { useDoubtsDataById } from '../../hooks/useDoubtsById'
 import DoubtContent from '../components/doubt-content'

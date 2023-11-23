@@ -13,12 +13,19 @@ import {
 } from 'lucide-react'
 import useWindowSize from '../../hooks/useWindowSize'
 import truncateText from '../../utils/truncateText'
+import LoadingScreen from '../components/containers/loading-screen'
+import { useDoubtsDataByUser } from '../../hooks/useDoubtsByUser'
 
-const Page = () => {
+const Page = ({ searchParams }: { searchParams: { id: string } }) => {
+  const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
   const screenWidht = useWindowSize()
+
+  if (isLoading) {
+    return <LoadingScreen />
+  }
   return (
     <div className="bg-red w-screen mt-7 flex flex-col items-center">
-      {orderRelevantDoubts(doubts).map((item: IDoubts) => (
+      {orderRelevantDoubts(data).map((item: IDoubts) => (
         <div
           key={item.id}
           className="flex gap-2 p-2 rounded-lg bg-gray-300 items-center justify-center w-[90%] my-1"

@@ -11,6 +11,7 @@ interface IProfileProps {
 const Profile = (props: IProfileProps) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const userId = Cookies.get('userId')
 
   const logout = () => {
     Cookies.remove('token')
@@ -60,7 +61,7 @@ const Profile = (props: IProfileProps) => {
               Publicar Nova Dúvida
             </Link>
             <Link
-              href="/user-doubts"
+              href={`/user-doubts?id=${userId}`}
               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
               Minhas Dúvidas

@@ -125,6 +125,11 @@ const createDoubt = async (data: {
   return response
 }
 
+const fetchDoubtsByUser = async (id: string) => {
+  const response = await axios.get(`/doubts/user-doubts/${id}`)
+  return response
+}
+
 export {
   registerData,
   loginData,
@@ -137,4 +142,5 @@ export {
   likeComment,
   dislikeComment,
   createDoubt,
+  fetchDoubtsByUser,
 }
