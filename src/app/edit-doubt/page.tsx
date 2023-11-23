@@ -5,32 +5,39 @@ import { useEffect, useState } from 'react'
 import categoryList, { ICategory } from '../../data/categorys'
 import { DoubtData, doubtSchema } from '../../types/doubtSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useDoubtMutate } from '../../hooks/useDoubtsMutate'
-import LoadingIcon from '../components/icons/loading-icon'
 
-const PublishDoubt = () => {
+import LoadingIcon from '../components/icons/loading-icon'
+import { useDoubtsDataById } from '../../hooks/useDoubtsById'
+import LoadingScreen from '../components/containers/loading-screen'
+import { useEditDoubtMutate } from '../../hooks/useEditDoubtsMutate'
+
+const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
+  const { data, isLoading } = useDoubtsDataById(searchParams.id)
+  const { mutate, isPending } = useEditDoubtMutate()
   const {
     handleSubmit,
     control,
-    setValue,
     register,
+    setValue,
     formState: { errors },
-  } = useForm<DoubtData>({
+  } = useForm<Partial<DoubtData>>({
     resolver: zodResolver(doubtSchema),
   })
-  useEffect(() => {
-    setValue('category', categoryList[0].name)
-  }, [])
-  const { mutate, isPending } = useDoubtMutate()
+
   const [image, setImage] = useState<File | null>(null)
 
   const handleFileChange = (file: File) => {
     setImage(file)
   }
 
-  const onSubmit = (data: DoubtData) => {
-    const newData = { ...data, image }
+  const onSubmit = (data: Partial<DoubtData>) => {
+    const newData = { ...data, image, doubtsId: searchParams.id }
+    console.log(newData)
     mutate(newData)
+  }
+
+  if (isLoading) {
+    return <LoadingScreen />
   }
 
   return (
@@ -41,11 +48,10 @@ const PublishDoubt = () => {
       <div className="mb-4">
         <label className="block text-gray-600">Título:</label>
         <input
-          {...register('title', { required: 'Campo obrigatório' })}
+          {...register('title', { value: data.title })}
           type="text"
           className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
         />
-        <span className="text-red-500 text-sm">{errors.title?.message}</span>
       </div>
 
       <div className="mb-4">
@@ -54,7 +60,6 @@ const PublishDoubt = () => {
           render={({ field }) => (
             <select
               {...field}
-              defaultValue={categoryList[0].name}
               className="form-select mt-1 block w-full p-2 border rounded-md shadow-sm"
             >
               {categoryList.map((item: ICategory) => (
@@ -64,6 +69,7 @@ const PublishDoubt = () => {
               ))}
             </select>
           )}
+          defaultValue={data.category}
           control={control}
           name="category"
         />
@@ -72,7 +78,7 @@ const PublishDoubt = () => {
       <div className="mb-4 ">
         <label className="block text-gray-600">Descrição:</label>
         <textarea
-          {...register('description', { required: 'Campo obrigatório' })}
+          {...register('description', { value: data.description })}
           rows={6}
           className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
         />
@@ -97,4 +103,4 @@ const PublishDoubt = () => {
   )
 }
 
-export default PublishDoubt
+export default EditDoubt

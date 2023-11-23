@@ -9,7 +9,7 @@ import LoadingIcon from '../components/icons/loading-icon'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 
-const Page = () => {
+const Register = () => {
   const {
     handleSubmit,
     register,
@@ -118,4 +118,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default Register

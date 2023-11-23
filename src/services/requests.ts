@@ -125,6 +125,39 @@ const createDoubt = async (data: {
   return response
 }
 
+const editDoubt = async (data: {
+  title?: string
+  category?: string
+  description?: string
+  image?: null | File
+  userId?: string
+  doubtsId: string
+}) => {
+  const token = Cookies.get('token')
+  const userId = Cookies.get('userId')
+  const formData = new FormData()
+
+  formData.append('title', data.title || '')
+
+  if (data.category) {
+    formData.append('category', data.category)
+  }
+  if (data.description) {
+    formData.append('description', data.description)
+  }
+  if (data.image) formData.append('image', data.image)
+  formData.append('userId', userId as string)
+  console.log(formData)
+
+  const response = await axios.patch(`doubts/${data.doubtsId}`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  return response
+}
+
 const fetchDoubtsByUser = async (id: string) => {
   const response = await axios.get(`/doubts/user-doubts/${id}`)
   return response
@@ -142,5 +175,6 @@ export {
   likeComment,
   dislikeComment,
   createDoubt,
+  editDoubt,
   fetchDoubtsByUser,
 }
