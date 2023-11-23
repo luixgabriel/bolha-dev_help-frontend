@@ -8,7 +8,8 @@ import {
   ArrowRight,
   CircleEllipsis,
   MessageSquare,
-  MoreHorizontal,
+  Pencil,
+  X,
 } from 'lucide-react'
 import useWindowSize from '../../hooks/useWindowSize'
 import truncateText from '../../utils/truncateText'
@@ -16,7 +17,7 @@ import truncateText from '../../utils/truncateText'
 const Page = () => {
   const screenWidht = useWindowSize()
   return (
-    <div className="bg-red w-screen flex flex-col items-center">
+    <div className="bg-red w-screen mt-7 flex flex-col items-center">
       {orderRelevantDoubts(doubts).map((item: IDoubts) => (
         <div
           key={item.id}
@@ -32,21 +33,34 @@ const Page = () => {
             className="rounded-full cursor-pointer"
           />
           <p className="w-[60%]">
-            {(screenWidht as number) < 500
+            {(screenWidht as number) < 700
               ? truncateText(item.title, 35)
               : item.title}
           </p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <span className="flex gap-1">
               <MessageSquare className="cursor-pointer" />
               {item.Answers ? item.Answers.length : item.Answers}
             </span>
-            <ArrowRight className="cursor-pointer" />
-            <CircleEllipsis />
-          </div>
-          <div>
-            <button>editar</button>
-            <button>excluir</button>
+            {(screenWidht as number) < 700 ? (
+              <>
+                {' '}
+                <Pencil />
+                <X />
+              </>
+            ) : (
+              <>
+                <ArrowRight />
+                <button className="bg-green-300 p-2 rounded-md shadow-md flex justify-center items-center gap-1">
+                  Editar
+                  <Pencil size={17} />
+                </button>
+                <button className="bg-red-300 p-2 rounded-md shadow-md flex justify-between items-center gap-1">
+                  Deletar
+                  <X size={17} />
+                </button>
+              </>
+            )}
           </div>
         </div>
       ))}

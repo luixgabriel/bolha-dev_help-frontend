@@ -59,9 +59,12 @@ const Profile = (props: IProfileProps) => {
             >
               Publicar Nova Dúvida
             </Link>
-            <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <Link
+              href="/user-doubts"
+              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
               Minhas Dúvidas
-            </span>
+            </Link>
             <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Minhas Respostas
             </span>

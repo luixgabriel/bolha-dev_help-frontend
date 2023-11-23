@@ -36,7 +36,7 @@ const Page = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg mx-auto mt-4 bg-white p-8 shadow-md rounded"
+      className="max-w-lg mx-auto  bg-white p-8 shadow-md rounded"
     >
       <div className="mb-4">
         <label className="block text-gray-600">Título:</label>
