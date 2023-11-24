@@ -13,12 +13,14 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import DeleteModal from '../components/delete-modal'
+import Cookies from 'js-cookie'
 
 const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
   const screenWidht = useWindowSize()
   const router = useRouter()
+  const token = Cookies.get('token')
 
   const handleNavigate = (id: string) => {
     router.push(`/doubts?id=${id}`)
@@ -38,6 +40,10 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
 
   const cancelDelete = () => {
     setShowModal(false)
+  }
+
+  if (!token) {
+    router.push('/')
   }
 
   if (isLoading) {
@@ -84,7 +90,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   onClick={() => handleNavigateToEdit(item.id)}
                   className="cursor-pointer"
                 />
-                <X onClick={handleDelete} />
+                <X onClick={handleDelete} className="cursor-pointer" />
               </>
             ) : (
               <>
