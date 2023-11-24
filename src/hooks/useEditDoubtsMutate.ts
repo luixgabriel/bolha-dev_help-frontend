@@ -10,7 +10,9 @@ export function useEditDoubtMutate() {
     mutationFn: editDoubt,
     retry: 2,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['doubts-data'] })
+      queryClient.invalidateQueries({
+        queryKey: ['doubts-data', 'doubts-data-by-id'],
+      })
       toast.success('Dúvida editada com sucesso.')
       router.push(`/doubts/?id=${data.data.id}`)
     },

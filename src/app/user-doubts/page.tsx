@@ -10,8 +10,12 @@ import truncateText from '../../utils/truncateText'
 import LoadingScreen from '../components/containers/loading-screen'
 import { useDoubtsDataByUser } from '../../hooks/useDoubtsByUser'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+import { useState } from 'react'
+import DeleteModal from '../components/delete-modal'
 
 const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
+  const [showModal, setShowModal] = useState<boolean>(false)
   const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
   const screenWidht = useWindowSize()
   const router = useRouter()
@@ -22,6 +26,18 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
 
   const handleNavigateToEdit = (id: string) => {
     router.push(`/edit-doubt?id=${id}`)
+  }
+
+  const handleDelete = () => {
+    setShowModal(true)
+  }
+
+  const confirmDelete = () => {
+    setShowModal(false)
+  }
+
+  const cancelDelete = () => {
+    setShowModal(false)
   }
 
   if (isLoading) {
@@ -49,6 +65,11 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
               : item.title}
           </p>
           <div className="flex gap-2 items-center">
+            <DeleteModal
+              show={showModal}
+              onConfirm={confirmDelete}
+              onCancel={cancelDelete}
+            />
             <span className="flex gap-1">
               <MessageSquare
                 onClick={() => handleNavigate(item.id)}
@@ -63,7 +84,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   onClick={() => handleNavigateToEdit(item.id)}
                   className="cursor-pointer"
                 />
-                <X />
+                <X onClick={handleDelete} />
               </>
             ) : (
               <>
@@ -71,11 +92,17 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   onClick={() => handleNavigate(item.id)}
                   className="cursor-pointer"
                 />
-                <button className="bg-green-300 p-2 rounded-md shadow-md flex justify-center items-center gap-1">
+                <button
+                  onClick={() => handleNavigateToEdit(item.id)}
+                  className="bg-green-300 p-2 rounded-md shadow-md flex justify-center items-center gap-1"
+                >
                   Editar
                   <Pencil size={17} />
                 </button>
-                <button className="bg-red-300 p-2 rounded-md shadow-md flex justify-between items-center gap-1">
+                <button
+                  onClick={handleDelete}
+                  className="bg-red-300 p-2 rounded-md shadow-md flex justify-between items-center gap-1"
+                >
                   Deletar
                   <X size={17} />
                 </button>

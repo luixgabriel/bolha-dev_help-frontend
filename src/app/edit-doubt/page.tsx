@@ -1,7 +1,7 @@
 'use client'
 import { useForm, Controller } from 'react-hook-form'
 import { FileInput } from '../components/drag-drop-input'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import categoryList, { ICategory } from '../../data/categorys'
 import { DoubtData, doubtSchema } from '../../types/doubtSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,7 +18,7 @@ const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
     handleSubmit,
     control,
     register,
-    setValue,
+
     formState: { errors },
   } = useForm<Partial<DoubtData>>({
     resolver: zodResolver(doubtSchema),
@@ -32,7 +32,6 @@ const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
 
   const onSubmit = (data: Partial<DoubtData>) => {
     const newData = { ...data, image, doubtsId: searchParams.id }
-    console.log(newData)
     mutate(newData)
   }
 
@@ -43,7 +42,7 @@ const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg mx-auto  bg-white p-8 shadow-md rounded"
+      className="max-w-lg mx-auto bg-white p-8 shadow-md rounded"
     >
       <div className="mb-4">
         <label className="block text-gray-600">Título:</label>

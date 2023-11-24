@@ -3,7 +3,6 @@ import { LoginData } from '../types/login-schema'
 import { RegisterData } from '../types/register-schema'
 import axios from './axios'
 import { toast } from 'react-toastify'
-import { title } from 'process'
 
 const registerData = async (data: RegisterData) => {
   const response = await axios.post('/auth/register', data)
