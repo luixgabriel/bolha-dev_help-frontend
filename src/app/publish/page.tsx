@@ -7,8 +7,12 @@ import { DoubtData, doubtSchema } from '../../types/doubtSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useDoubtMutate } from '../../hooks/useDoubtsMutate'
 import LoadingIcon from '../components/icons/loading-icon'
+import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 const PublishDoubt = () => {
+  const router = useRouter()
+  const token = Cookies.get('token')
   const {
     handleSubmit,
     control,
@@ -31,6 +35,10 @@ const PublishDoubt = () => {
   const onSubmit = (data: DoubtData) => {
     const newData = { ...data, image }
     mutate(newData)
+  }
+
+  if (!token) {
+    router.push('/')
   }
 
   return (
