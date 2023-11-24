@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 
 const PublishDoubt = () => {
+  const router = useRouter()
   const {
     handleSubmit,
     control,
@@ -20,7 +21,6 @@ const PublishDoubt = () => {
   } = useForm<DoubtData>({
     resolver: zodResolver(doubtSchema),
   })
-  const router = useRouter()
   const token = Cookies.get('token')
 
   useEffect(() => {
