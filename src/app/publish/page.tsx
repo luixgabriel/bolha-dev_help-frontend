@@ -24,6 +24,9 @@ const PublishDoubt = () => {
   })
   useEffect(() => {
     setValue('category', categoryList[0].name)
+    if (!token) {
+      router.push('/')
+    }
   }, [])
   const { mutate, isPending } = useDoubtMutate()
   const [image, setImage] = useState<File | null>(null)
@@ -35,10 +38,6 @@ const PublishDoubt = () => {
   const onSubmit = (data: DoubtData) => {
     const newData = { ...data, image }
     mutate(newData)
-  }
-
-  if (!token) {
-    router.push('/')
   }
 
   return (
