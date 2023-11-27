@@ -10,14 +10,16 @@ import truncateText from '../../utils/truncateText'
 import LoadingScreen from '../components/containers/loading-screen'
 import { useDoubtsDataByUser } from '../../hooks/useDoubtsByUser'
 import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
 import { useState } from 'react'
 import DeleteModal from '../components/delete-modal'
 import Cookies from 'js-cookie'
+import { useDeleteDoubtMutate } from '../../hooks/useDeleteDoubt'
 
 const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null)
   const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
+  const { mutate } = useDeleteDoubtMutate()
   const screenWidht = useWindowSize()
   const router = useRouter()
   const token = Cookies.get('token')
@@ -30,12 +32,15 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
     router.push(`/edit-doubt?id=${id}`)
   }
 
-  const handleDelete = () => {
+  const handleDelete = (id: string) => {
+    setSelectedItemId(id)
     setShowModal(true)
   }
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
+    mutate(selectedItemId as string)
     setShowModal(false)
+    router.refresh()
   }
 
   const cancelDelete = () => {
@@ -90,7 +95,10 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   onClick={() => handleNavigateToEdit(item.id)}
                   className="cursor-pointer"
                 />
-                <X onClick={handleDelete} className="cursor-pointer" />
+                <X
+                  onClick={() => handleDelete(item.id)}
+                  className="cursor-pointer"
+                />
               </>
             ) : (
               <>
@@ -106,7 +114,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   <Pencil size={17} />
                 </button>
                 <button
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(item.id)}
                   className="bg-red-300 p-2 rounded-md shadow-md flex justify-between items-center gap-1"
                 >
                   Deletar

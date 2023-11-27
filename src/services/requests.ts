@@ -157,6 +157,17 @@ const editDoubt = async (data: {
   return response
 }
 
+const deleteDoubt = async (id: string) => {
+  const token = Cookies.get('token')
+  const response = await axios.delete(`/doubts/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  console.log(response)
+  return response
+}
+
 const fetchDoubtsByUser = async (id: string) => {
   const response = await axios.get(`/doubts/user-doubts/${id}`)
   return response
@@ -175,5 +186,6 @@ export {
   dislikeComment,
   createDoubt,
   editDoubt,
+  deleteDoubt,
   fetchDoubtsByUser,
 }
