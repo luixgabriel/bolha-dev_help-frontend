@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import doubts from '../../data/doubts'
 import defaultImg from '../../assets/imgs/null.png'
 import { IDoubts } from '../../types/doubts'
 import orderRelevantDoubts from '../../utils/orderRelevantDoubts'
@@ -13,13 +12,10 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import DeleteModal from '../components/delete-modal'
 import Cookies from 'js-cookie'
-import { useDeleteDoubtMutate } from '../../hooks/useDeleteDoubt'
 
 const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [selectedItemId, setSelectedItemId] = useState<string | null>(null)
   const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
-  const { mutate } = useDeleteDoubtMutate()
   const screenWidht = useWindowSize()
   const router = useRouter()
   const token = Cookies.get('token')
@@ -32,15 +28,13 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
     router.push(`/edit-doubt?id=${id}`)
   }
 
-  const handleDelete = (id: string) => {
-    setSelectedItemId(id)
+  const handleDelete = () => {
     setShowModal(true)
   }
 
   const confirmDelete = async () => {
-    mutate(selectedItemId as string)
     setShowModal(false)
-    router.refresh()
+    window.location.reload()
   }
 
   const cancelDelete = () => {
@@ -77,6 +71,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
           </p>
           <div className="flex gap-2 items-center">
             <DeleteModal
+              doubtId={item.id}
               show={showModal}
               onConfirm={confirmDelete}
               onCancel={cancelDelete}
@@ -95,10 +90,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   onClick={() => handleNavigateToEdit(item.id)}
                   className="cursor-pointer"
                 />
-                <X
-                  onClick={() => handleDelete(item.id)}
-                  className="cursor-pointer"
-                />
+                <X onClick={() => handleDelete()} className="cursor-pointer" />
               </>
             ) : (
               <>
@@ -114,7 +106,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   <Pencil size={17} />
                 </button>
                 <button
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDelete()}
                   className="bg-red-300 p-2 rounded-md shadow-md flex justify-between items-center gap-1"
                 >
                   Deletar

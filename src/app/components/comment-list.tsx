@@ -18,9 +18,7 @@ const CommentList = ({ comment }: any) => {
   const likeMutate = useMutation({
     mutationFn: likeComment,
     retry: 2,
-    onSuccess: (data, itemId) => {
-      console.log(itemId)
-      console.log(data)
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
       if (token) {
         setTimeout(() => {
@@ -35,9 +33,7 @@ const CommentList = ({ comment }: any) => {
   const dislikeMutate = useMutation({
     mutationFn: dislikeComment,
     retry: 2,
-    onSuccess: (data, itemId) => {
-      console.log(itemId)
-      console.log(data)
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['doubts-data-by-id'] })
       if (token) {
         setTimeout(() => {
