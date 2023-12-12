@@ -28,3 +28,20 @@ export interface IAnswersInDoubts {
     name: string
   }
 }
+
+export interface IUserAnswers {
+  id: string
+  description: string
+  likes: number
+  usersLikeThisAnswer: string[]
+  createdAt: string
+  Comment?: string[]
+  user: {
+    id: string
+    name: string
+    imageUrl: string
+  }
+  doubts: {
+    id: string
+  }
+}

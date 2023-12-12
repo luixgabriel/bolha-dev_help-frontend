@@ -173,6 +173,12 @@ const fetchDoubtsByUser = async (id: string) => {
   return response
 }
 
+const fetchAnswersByUser = async (id: string) => {
+  const response = await axios.get(`/answers/user-answers/${id}`)
+  console.log(response)
+  return response
+}
+
 export {
   registerData,
   loginData,
@@ -188,4 +194,5 @@ export {
   editDoubt,
   deleteDoubt,
   fetchDoubtsByUser,
+  fetchAnswersByUser,
 }

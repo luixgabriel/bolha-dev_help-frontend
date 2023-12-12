@@ -27,6 +27,7 @@ const DeleteModal = ({
       setIsSuccess(true)
     },
     onError: (error) => {
+      setLoading(false)
       console.log(error)
       toast.error('Erro ao deletar a dúvida, Tente novamente.')
     },

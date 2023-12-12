@@ -66,9 +66,12 @@ const Profile = (props: IProfileProps) => {
             >
               Minhas Dúvidas
             </Link>
-            <span className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <Link
+              href={`/user-answers?id=${userId}`}
+              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
               Minhas Respostas
-            </span>
+            </Link>
             <span
               onClick={() => logout()}
               className="block w-full text-left px-4 py-2 text-sm text-red-600  border-t-1 bg-slate-200 hover:text-red-400"

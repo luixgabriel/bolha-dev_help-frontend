@@ -3,7 +3,7 @@ import Image from 'next/image'
 import defaultImg from '../../assets/imgs/null.png'
 import { IDoubts } from '../../types/doubts'
 import orderRelevantDoubts from '../../utils/orderRelevantDoubts'
-import { ArrowRight, MessageSquare, Pencil, X } from 'lucide-react'
+import { ArrowRight, ThumbsUp, Pencil, X, MessageSquare } from 'lucide-react'
 import useWindowSize from '../../hooks/useWindowSize'
 import truncateText from '../../utils/truncateText'
 import LoadingScreen from '../components/containers/loading-screen'
@@ -12,10 +12,12 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import DeleteModal from '../components/delete-modal'
 import Cookies from 'js-cookie'
+import { useAnswersDataByUser } from '../../hooks/useAnswersByUser'
+import { IUserAnswers } from '../../types/answers'
 
-const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
+const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
+  const { data, isLoading } = useAnswersDataByUser(searchParams.id)
   console.log(data)
   const screenWidht = useWindowSize()
   const router = useRouter()
@@ -51,7 +53,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   }
   return (
     <div className="bg-red w-screen mt-7 flex flex-col items-center">
-      {data?.map((item: IDoubts) => (
+      {data?.map((item: IUserAnswers) => (
         <div
           key={item.id}
           className="flex gap-2 p-2 rounded-lg bg-gray-300 items-center justify-center w-[90%] my-1"
@@ -67,8 +69,8 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
           />
           <p className="w-[60%]">
             {(screenWidht as number) < 700
-              ? truncateText(item.title, 35)
-              : item.title}
+              ? truncateText(item.description, 35)
+              : item.description}
           </p>
           <div className="flex gap-2 items-center">
             <DeleteModal
@@ -78,11 +80,18 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
               onCancel={cancelDelete}
             />
             <span className="flex gap-1">
-              <MessageSquare
-                onClick={() => handleNavigate(item.id)}
+              <ThumbsUp
+                onClick={() => handleNavigate(item.doubts.id)}
                 className="cursor-pointer"
               />
-              {item.Answers ? item.Answers.length : item.Answers}
+              {item.likes}
+            </span>
+            <span className="flex gap-1">
+              <MessageSquare
+                onClick={() => handleNavigate(item.doubts.id)}
+                className="cursor-pointer"
+              />
+              {item.Comment?.length}
             </span>
             {(screenWidht as number) < 700 ? (
               <>
@@ -122,4 +131,4 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   )
 }
 
-export default UserDoubts
+export default UserAnswers
