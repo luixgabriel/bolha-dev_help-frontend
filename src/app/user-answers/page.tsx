@@ -7,10 +7,10 @@ import truncateText from '../../utils/truncateText'
 import LoadingScreen from '../components/containers/loading-screen'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import DeleteModal from '../components/delete-modal'
 import Cookies from 'js-cookie'
 import { useAnswersDataByUser } from '../../hooks/useAnswersByUser'
 import { IUserAnswers } from '../../types/answers'
+import DeleteModalAnswers from '../components/delete-modal-answers'
 
 const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
@@ -49,7 +49,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
   }
   return (
     <div className="bg-red w-screen mt-7 flex flex-col items-center">
-      {data?.map((item: IUserAnswers) => (
+      {data.map((item: IUserAnswers) => (
         <div
           key={item.id}
           className="flex gap-2 p-2 rounded-lg bg-gray-300 items-center justify-center w-[90%] my-1"
@@ -69,8 +69,8 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
               : item.description}
           </p>
           <div className="flex gap-2 items-center">
-            <DeleteModal
-              doubtId={item.id}
+            <DeleteModalAnswers
+              answerId={item.id}
               show={showModal}
               onConfirm={confirmDelete}
               onCancel={cancelDelete}

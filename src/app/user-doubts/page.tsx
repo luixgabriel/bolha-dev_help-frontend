@@ -51,7 +51,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   }
   return (
     <div className="bg-red w-screen mt-7 flex flex-col items-center">
-      {data?.map((item: IDoubts) => (
+      {data.map((item: IDoubts) => (
         <div
           key={item.id}
           className="flex gap-2 p-2 rounded-lg bg-gray-300 items-center justify-center w-[90%] my-1"

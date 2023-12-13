@@ -96,7 +96,6 @@ const dislikeComment = async (id: string) => {
   if (!userId) return toast.error('Você precisa estar autenticado para isso.')
   const data = { userId }
   const response = await axios.patch(`/comment/dislike/${id}`, data)
-  console.log(response)
   return response
 }
 
@@ -167,6 +166,16 @@ const deleteDoubt = async (id: string) => {
   return response
 }
 
+const deleteAnswer = async (id: string) => {
+  const token = Cookies.get('token')
+  const response = await axios.delete(`/answers/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return response
+}
+
 const fetchDoubtsByUser = async (id: string) => {
   const response = await axios.get(`/doubts/user-doubts/${id}`)
   return response
@@ -192,6 +201,7 @@ export {
   createDoubt,
   editDoubt,
   deleteDoubt,
+  deleteAnswer,
   fetchDoubtsByUser,
   fetchAnswersByUser,
 }
