@@ -164,7 +164,6 @@ const deleteDoubt = async (id: string) => {
       Authorization: `Bearer ${token}`,
     },
   })
-  console.log(response)
   return response
 }
 

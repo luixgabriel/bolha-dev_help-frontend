@@ -18,7 +18,6 @@ import { IUserAnswers } from '../../types/answers'
 const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const { data, isLoading } = useAnswersDataByUser(searchParams.id)
-  console.log(data)
   const screenWidht = useWindowSize()
   const router = useRouter()
   const token = Cookies.get('token')
@@ -80,10 +79,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
               onCancel={cancelDelete}
             />
             <span className="flex gap-1">
-              <ThumbsUp
-                onClick={() => handleNavigate(item.doubts.id)}
-                className="cursor-pointer"
-              />
+              <ThumbsUp />
               {item.likes}
             </span>
             <span className="flex gap-1">
@@ -105,7 +101,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
             ) : (
               <>
                 <ArrowRight
-                  onClick={() => handleNavigate(item.id)}
+                  onClick={() => handleNavigate(item.doubts.id)}
                   className="cursor-pointer"
                 />
                 <button

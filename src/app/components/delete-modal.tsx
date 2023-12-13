@@ -22,7 +22,8 @@ const DeleteModal = ({
   const deleteDoubtMutate = useMutation({
     mutationFn: deleteDoubt,
     retry: 2,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data)
       setLoading(false)
       setIsSuccess(true)
     },
@@ -56,7 +57,7 @@ const DeleteModal = ({
                   </p>
                   <div>
                     <button
-                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 mr-2 rounded"
+                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 mr-2 rounded cursor-pointer"
                       onClick={onConfirm}
                     >
                       Continuar
