@@ -40,7 +40,7 @@ const DeleteModal = ({
   return (
     show && (
       <div className="fixed inset-0 flex items-center justify-center z-10">
-        <div className="fixed inset-0 bg-blak opacity-70"></div>
+        <div className="fixed inset-0 bg-blak bg-opacity-50"></div>
         <div className="bg-white p-4 rounded-md z-20 w-[90%] flex flex-col items-center justify-center md:w-[30%] md:h-[40%]">
           {loading ? (
             <div className="flex justify-cente h-44">
