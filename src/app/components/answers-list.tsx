@@ -11,6 +11,7 @@ import CommentList from './comment-list'
 import InputComment from './input-comment'
 
 const AnswersList = ({ answers }: any) => {
+  console.log('oi')
   const userId = Cookies.get('userId')
   const token = Cookies.get('token')
   const [likedAnswers, setLikedAnswers] = useState<{ [key: string]: boolean }>(
