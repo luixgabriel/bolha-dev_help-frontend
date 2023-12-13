@@ -20,7 +20,6 @@ const Profile = (props: IProfileProps) => {
   }
   const handleOutsideClick = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      console.log(menuIsOpen)
       setMenuIsOpen(false)
     }
   }
