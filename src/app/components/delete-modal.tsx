@@ -49,7 +49,7 @@ const DeleteModal = ({
           ) : (
             <>
               {' '}
-              {isSuccess ? (
+              {!isSuccess ? (
                 <>
                   <CheckCircle size={50} color="#16A34A" className="m-5" />
                   <p className="text-gray-800 mb-4">
