@@ -45,10 +45,14 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
   }
 
   if (isLoading) {
-    return <LoadingScreen />
+    return (
+      <div className="w-screen h-screen">
+        <LoadingScreen />
+      </div>
+    )
   }
   return (
-    <div className="bg-red w-screen mt-7 flex flex-col items-center">
+    <div className="w-screen h-screen mt-7 flex flex-col items-center">
       {data.map((item: IUserAnswers) => (
         <div
           key={item.id}

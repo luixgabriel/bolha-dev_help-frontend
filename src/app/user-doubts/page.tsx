@@ -16,7 +16,6 @@ import Cookies from 'js-cookie'
 const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
-  console.log(data)
   const screenWidht = useWindowSize()
   const router = useRouter()
   const token = Cookies.get('token')
@@ -47,10 +46,14 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   }
 
   if (isLoading) {
-    return <LoadingScreen />
+    return (
+      <div className="w-screen h-screen">
+        <LoadingScreen />
+      </div>
+    )
   }
   return (
-    <div className="bg-red w-screen mt-7 flex flex-col items-center">
+    <div className="w-screen h-screen mt-7 flex flex-col items-center">
       {data.map((item: IDoubts) => (
         <div
           key={item.id}

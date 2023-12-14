@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Header from './components/header'
 import { DefaultProviders } from './components/default-providers'
+import Footer from './components/footer'
 
 const coolvetica = localFont({
   src: '../assets/fonts/Garet-Book.ttf',
@@ -32,6 +33,7 @@ export default function RootLayout({
             autoClose={1500}
           />
           {children}
+          <Footer />
         </DefaultProviders>
       </body>
     </html>
