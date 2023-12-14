@@ -1,30 +1,25 @@
 'use client'
-import { useForm, Controller } from 'react-hook-form'
-import { FileInput } from '../components/drag-drop-input'
-import { useState } from 'react'
+import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import categoryList, { ICategory } from '../../data/categorys'
 import { DoubtData, doubtSchema } from '../../types/doubtSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import LoadingIcon from '../components/icons/loading-icon'
-import { useDoubtsDataById } from '../../hooks/useDoubtsById'
 import LoadingScreen from '../components/containers/loading-screen'
 import { useEditDoubtMutate } from '../../hooks/useEditDoubtsMutate'
+import { useAnswersDataById } from '../../hooks/useAnswersById'
+import { useEditAnswerMutate } from '../../hooks/useEditAnswerMutate'
 
-const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
-  const { data, isLoading } = useDoubtsDataById(searchParams.id)
-  const { mutate, isPending } = useEditDoubtMutate()
+const EditAnswer = ({ searchParams }: { searchParams: { id: string } }) => {
+  const { data, isLoading } = useAnswersDataById(searchParams.id)
+  const { mutate, isPending } = useEditAnswerMutate()
   const {
     handleSubmit,
-    control,
     register,
-
     formState: { errors },
-  } = useForm<Partial<DoubtData>>({
-    resolver: zodResolver(doubtSchema),
-  })
+  } = useForm<{ description?: string }>()
 
-  const onSubmit = (data: Partial<DoubtData>) => {
-    const newData = { ...data, doubtsId: searchParams.id }
+  const onSubmit: SubmitHandler<{ description?: string }> = (data) => {
+    const newData = { ...data, answerId: searchParams.id }
     mutate(newData)
   }
 
@@ -37,38 +32,8 @@ const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-lg mx-auto bg-white p-8 shadow-md rounded"
     >
-      <div className="mb-4">
-        <label className="block text-gray-600">Título:</label>
-        <input
-          {...register('title', { value: data.title })}
-          type="text"
-          className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-gray-600">Categoria:</label>
-        <Controller
-          render={({ field }) => (
-            <select
-              {...field}
-              className="form-select mt-1 block w-full p-2 border rounded-md shadow-sm"
-            >
-              {categoryList.map((item: ICategory) => (
-                <option value={item.name} key={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          )}
-          defaultValue={data.category}
-          control={control}
-          name="category"
-        />
-      </div>
-
       <div className="mb-4 ">
-        <label className="block text-gray-600">Descrição:</label>
+        <label className="block text-gray-600 p-2">Descrição:</label>
         <textarea
           {...register('description', { value: data.description })}
           rows={6}
@@ -76,11 +41,6 @@ const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
         />
         <span className="text-red-500 text-sm">
           {errors.description?.message}
-        </span>
-      </div>
-      <div className="my-4">
-        <span className="text-sm leading-3 pl-2 text-gray-400">
-          A imagem é opcional!
         </span>
       </div>
 
@@ -94,4 +54,4 @@ const EditDoubt = ({ searchParams }: { searchParams: { id: string } }) => {
   )
 }
 
-export default EditDoubt
+export default EditAnswer

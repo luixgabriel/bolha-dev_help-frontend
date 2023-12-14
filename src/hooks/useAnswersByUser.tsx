@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchAnswersByUser } from '../services/requests'
-import { IDoubts } from '../types/doubts'
 
 export function useAnswersDataByUser(id: string) {
   const query = useQuery({
     queryFn: () => fetchAnswersByUser(id),
-    queryKey: ['doubts-data-by-user', id],
+    queryKey: ['answers-data-by-user', id],
+    staleTime: 1000 * 60 * 1,
     retry: 2,
   })
 

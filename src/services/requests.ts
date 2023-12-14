@@ -41,6 +41,29 @@ const createAnswer = async (data: {
   return response
 }
 
+const editAnswer = async (args: {
+  description?: string
+  userId?: string
+  answerId: string
+}) => {
+  const token = Cookies.get('token')
+  const data = {
+    description: args.description,
+  }
+  const response = await axios.patch(`answers/${args.answerId}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  })
+  return response
+}
+
+const fetchAnswerById = async (id: string) => {
+  const response = await axios.get(`/answers/${id}`)
+  return response
+}
+
 const likeAnswer = async (id: string) => {
   const token = Cookies.get('token')
   if (!token) return toast.error('Você precisa estar autenticado para isso.')
@@ -145,7 +168,6 @@ const editDoubt = async (data: {
   }
   if (data.image) formData.append('image', data.image)
   formData.append('userId', userId as string)
-  console.log(formData)
 
   const response = await axios.patch(`doubts/${data.doubtsId}`, formData, {
     headers: {
@@ -183,7 +205,6 @@ const fetchDoubtsByUser = async (id: string) => {
 
 const fetchAnswersByUser = async (id: string) => {
   const response = await axios.get(`/answers/user-answers/${id}`)
-  console.log(response)
   return response
 }
 
@@ -201,7 +222,9 @@ export {
   createDoubt,
   editDoubt,
   deleteDoubt,
+  editAnswer,
   deleteAnswer,
+  fetchAnswerById,
   fetchDoubtsByUser,
   fetchAnswersByUser,
 }

@@ -6,6 +6,7 @@ export function useDoubtsDataByUser(id: string) {
   const query = useQuery({
     queryFn: () => fetchDoubtsByUser(id),
     queryKey: ['doubts-data-by-user', id],
+    staleTime: 1000 * 60 * 1,
     retry: 2,
   })
 

@@ -24,7 +24,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
   }
 
   const handleNavigateToEdit = (id: string) => {
-    router.push(`/edit-doubt?id=${id}`)
+    router.push(`/edit-answer?id=${id}`)
   }
 
   const handleDelete = () => {
