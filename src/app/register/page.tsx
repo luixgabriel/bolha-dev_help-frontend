@@ -8,6 +8,7 @@ import { useRegisterDataMutate } from '../../hooks/useRegisterMutate'
 import LoadingIcon from '../components/icons/loading-icon'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 const Register = () => {
   const {
@@ -20,6 +21,7 @@ const Register = () => {
 
   const token = Cookies.get('token')
   const router = useRouter()
+  const { darkMode } = useDarkMode()
   const { mutate, isPending } = useRegisterDataMutate()
 
   const onSubmit = async (data: RegisterData) => {
@@ -107,7 +109,11 @@ const Register = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-blak px-3 py-1.5 text-md text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className={`flex w-full justify-center rounded-md ${
+                darkMode
+                  ? 'bg-gray-200 text-black hover:bg-gray-300'
+                  : 'bg-blak text-white hover:bg-black'
+              } px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
             >
               {isPending ? <LoadingIcon /> : 'Criar conta'}
             </button>

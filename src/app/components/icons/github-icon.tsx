@@ -1,6 +1,7 @@
-import React from 'react'
+import { useDarkMode } from '../../../hooks/useDarkMode'
 
 const GithubIcon = () => {
+  const { darkMode } = useDarkMode()
   return (
     <svg
       width="22px"
@@ -33,7 +34,7 @@ const GithubIcon = () => {
           <g
             id="Dribbble-Light-Preview"
             transform="translate(-140.000000, -7559.000000)"
-            fill="#000000"
+            fill={darkMode ? 'white' : 'black'}
           >
             {' '}
             <g id="icons" transform="translate(56.000000, 160.000000)">

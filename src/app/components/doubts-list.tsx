@@ -7,14 +7,27 @@ import defaultImg from '../../assets/imgs/null.png'
 import orderRelevantDoubts from '../../utils/orderRelevantDoubts'
 import { useDoubtsData } from '../../hooks/useDoubts'
 import { useRouter } from 'next/navigation'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 const DoubtsList = () => {
   const { data, isLoading } = useDoubtsData()
+  const { darkMode } = useDarkMode()
   const screenWidht = useWindowSize()
   const router = useRouter()
 
   const handleNavigate = (id: string) => {
     router.push(`/doubts?id=${id}`)
+  }
+
+  if (!data && !isLoading) {
+    return (
+      <div className="w-screen flex justify-center items-center flex-col m-7">
+        <h1 className="text-xl font-bold m-5">Dúvidas mais relevantes:</h1>
+        <h1 className="font-bold">
+          Erro ao recuperar as Dúvidas, Por favor tente novamente.
+        </h1>
+      </div>
+    )
   }
 
   return (
@@ -27,7 +40,9 @@ const DoubtsList = () => {
         orderRelevantDoubts(data).map((item) => (
           <div
             key={item.id}
-            className="flex gap-2 p-2 rounded-lg bg-gray-300 items-center justify-center w-[90%] my-1"
+            className={`flex gap-2 p-2 rounded-lg ${
+              darkMode ? 'bg-gray-950' : 'bg-gray-300'
+            } items-center justify-center w-[98%] my-1 md:w-[90%]`}
           >
             <Image
               src={
