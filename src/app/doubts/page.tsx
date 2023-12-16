@@ -9,16 +9,22 @@ import DoubtContent from '../components/doubt-content'
 import LoadingScreen from '../components/containers/loading-screen'
 import TextAreaAnswer from '../components/textarea-answer'
 import AnswersList from '../components/answers-list'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const { data, isLoading } = useDoubtsDataById(searchParams.id)
+  const { darkMode } = useDarkMode()
 
   if (isLoading) {
-    return <LoadingScreen />
+    return (
+      <div className="w-screen h-screen">
+        <LoadingScreen />
+      </div>
+    )
   }
   return (
-    <div className="w-screen  flex flex-col">
-      <div className="flex items-center gap-3 p-3 justify-between mt-4 w-[97%] shadow-md self-center rounded-md">
+    <div className="w-screen flex flex-col overflow-y-hidden">
+      <div className="flex items-center gap-3 p-3 justify-between mt-4 w-[97%] shadow-md self-center rounded-md overflow-y-hidden">
         <div className="flex items-center gap-3">
           <Image
             src={

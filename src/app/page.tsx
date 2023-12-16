@@ -7,6 +7,7 @@ import homeImg from '../assets/imgs/main.png'
 import Image from 'next/image'
 import DoubtsList from './components/doubts-list'
 import HomeContainer from './components/containers/home-container'
+import Footer from './components/footer'
 
 export default function Home() {
   const { setIsAuthenticated } = useAuth()
@@ -27,6 +28,7 @@ export default function Home() {
       <HomeContainer>
         <DoubtsList />
       </HomeContainer>
+      <Footer />
     </ContainerMain>
   )
 }

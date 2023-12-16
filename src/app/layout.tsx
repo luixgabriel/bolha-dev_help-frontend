@@ -33,7 +33,6 @@ export default function RootLayout({
             autoClose={1500}
           />
           {children}
-          <Footer />
         </DefaultProviders>
       </body>
     </html>
