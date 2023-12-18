@@ -12,10 +12,12 @@ import { useAnswersDataByUser } from '../../hooks/useAnswersByUser'
 import { IUserAnswers } from '../../types/answers'
 import DeleteModalAnswers from '../components/delete-modal-answers'
 import Footer from '../components/footer'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const { data, isLoading } = useAnswersDataByUser(searchParams.id)
+  const { darkMode } = useDarkMode()
   const screenWidht = useWindowSize()
   const router = useRouter()
   const token = Cookies.get('token')
@@ -53,12 +55,14 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
     )
   }
   return (
-    <>
+    <div className={`${darkMode && 'bg-blak'}`}>
       <div className="w-screen h-screen mt-7 flex flex-col items-center">
         {data.map((item: IUserAnswers) => (
           <div
             key={item.id}
-            className="flex gap-2 p-2 rounded-lg bg-gray-300 items-center justify-center w-[90%] my-1"
+            className={`flex gap-2 p-2 rounded-lg ${
+              darkMode ? 'bg-gray-950 text-white' : 'bg-gray-300  text-black'
+            } items-center justify-center w-[90%] my-1`}
           >
             <Image
               src={
@@ -131,7 +135,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
         ))}
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

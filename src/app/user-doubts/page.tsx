@@ -13,9 +13,11 @@ import { useState } from 'react'
 import DeleteModal from '../components/delete-modal'
 import Cookies from 'js-cookie'
 import Footer from '../components/footer'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
+  const { darkMode } = useDarkMode()
   const { data, isLoading } = useDoubtsDataByUser(searchParams.id)
   const screenWidht = useWindowSize()
   const router = useRouter()
@@ -54,12 +56,14 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
     )
   }
   return (
-    <>
-      <div className="w-screen h-screen mt-7 flex flex-col items-center">
+    <div className={`${darkMode && 'bg-blak'}`}>
+      <div className="w-screen h-screen  flex flex-col items-center mt-7">
         {data.map((item: IDoubts) => (
           <div
             key={item.id}
-            className="flex gap-2 p-2 rounded-lg bg-gray-300 items-center justify-center w-[90%] my-1"
+            className={`flex gap-2 p-2 rounded-lg ${
+              darkMode ? 'bg-gray-950 text-white' : 'bg-gray-300  text-black'
+            } items-center justify-center w-[90%] my-1`}
           >
             <Image
               src={
@@ -128,7 +132,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
         ))}
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 
