@@ -43,10 +43,10 @@ const PublishDoubt = () => {
   }
 
   return (
-    <div className={`${darkMode && 'bg-blak'} h-full overflow-y-hidden`}>
+    <div className={`${darkMode && 'bg-blak'} h-screen w-screen`}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`max-w-lg mx-auto ${
+        className={` mx-auto h-screen w-screen ${
           darkMode ? 'bg-blak ' : 'bg-white'
         } p-8 shadow-md rounded`}
       >
