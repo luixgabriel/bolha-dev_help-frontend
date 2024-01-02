@@ -35,7 +35,11 @@ const DoubtsList = () => {
       <h1 className="text-xl font-bold m-5">Dúvidas mais relevantes:</h1>
 
       {isLoading ? (
-        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gray-900 mb-3"></div>
+        <div
+          className={`animate-spin rounded-full h-10 w-10 border-t-2 border-b-2  ${
+            darkMode ? 'border-white' : 'border-gray-900 mb-3'
+          }`}
+        />
       ) : (
         orderRelevantDoubts(data).map((item) => (
           <div

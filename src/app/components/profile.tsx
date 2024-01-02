@@ -3,12 +3,14 @@ import defaultImg from '../../assets/imgs/null.png'
 import Cookies from 'js-cookie'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 interface IProfileProps {
   imageUrl: string | null
   name: string
 }
 const Profile = (props: IProfileProps) => {
+  const { darkMode } = useDarkMode()
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const userId = Cookies.get('userId')
@@ -47,27 +49,41 @@ const Profile = (props: IProfileProps) => {
       {menuIsOpen && (
         <div
           ref={menuRef}
-          className="absolute right-4 top-[54px] mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10"
+          className={`absolute right-4 top-[54px] mt-2 w-48 ${
+            darkMode ? 'bg-blak' : 'bg-white'
+          } border border-gray-200 rounded-md shadow-lg z-10`}
         >
-          <p className="block w-full text-right px-4 py-1 text-sm border-b-2 text-gray-400 hover:bg-gray-100">
+          <p className="block w-full text-right px-4 py-1 text-sm border-b-2 text-gray-400 ">
             {props.name}
           </p>
           <div>
             <Link
               href="/publish"
-              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              className={`block w-full text-left px-4 py-2 text-sm ${
+                darkMode
+                  ? 'text-white hover:bg-gray-700'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }  `}
             >
               Publicar Nova Dúvida
             </Link>
             <Link
               href={`/user-doubts?id=${userId}`}
-              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              className={`block w-full text-left px-4 py-2 text-sm ${
+                darkMode
+                  ? 'text-white hover:bg-gray-700'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }  `}
             >
               Minhas Dúvidas
             </Link>
             <Link
               href={`/user-answers?id=${userId}`}
-              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              className={`block w-full text-left px-4 py-2 text-sm ${
+                darkMode
+                  ? 'text-white hover:bg-gray-700'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }  `}
             >
               Minhas Respostas
             </Link>

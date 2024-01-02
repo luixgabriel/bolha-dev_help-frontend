@@ -3,9 +3,11 @@ import { useAuth } from '../../hooks/useAuth'
 import { SendHorizontalIcon } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { useCommentMutate } from '../../hooks/useCommentMutate'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 const InputComment = ({ answerId }: { answerId: string }) => {
   const { isAuthenticated } = useAuth()
+  const { darkMode } = useDarkMode()
   const {
     register,
     handleSubmit,
@@ -25,7 +27,11 @@ const InputComment = ({ answerId }: { answerId: string }) => {
     <div className="block w-[95%] self-center">
       {isPending ? (
         <div className="flex justify-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 self-center border-gray-900 m-5"></div>
+          <div
+            className={`animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 self-center ${
+              darkMode ? 'border-white' : 'border-gray-900 mb-3'
+            } m-5`}
+          />
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,7 +41,9 @@ const InputComment = ({ answerId }: { answerId: string }) => {
               required: 'Campo obrigatório',
             })}
             placeholder="Responder"
-            className="block w-[95%] rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black focus:ring-2 focus:ring-inset"
+            className={`block w-[95%] rounded-md border-0 mt-1 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black focus:ring-2 focus:ring-inset focus:outline-none ${
+              darkMode && 'text-black'
+            }`}
           />
           {errors.content && (
             <p className="text-red-500  mt-1">{errors.content.message}</p>

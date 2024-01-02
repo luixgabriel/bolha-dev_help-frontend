@@ -11,7 +11,6 @@ import CommentList from './comment-list'
 import InputComment from './input-comment'
 
 const AnswersList = ({ answers }: any) => {
-  console.log('oi')
   const userId = Cookies.get('userId')
   const token = Cookies.get('token')
   const [likedAnswers, setLikedAnswers] = useState<{ [key: string]: boolean }>(
@@ -105,36 +104,7 @@ const AnswersList = ({ answers }: any) => {
               </div>
               <p className="px-1 my-2 mb-3">{item.description}</p>
               <InputComment answerId={item.id} />
-              {/* <input
-                type="text"
-                placeholder="Responder"
-                className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
-              />
-              <span
-                className="flex items-center gap-2 my-2  cursor-pointer"
-                onClick={() => functionTeste(item.id)}
-              >
-                Enviar <SendHorizontalIcon size={18} />
-              </span> */}
               <div className="flex gap-2 mt-2 mb-3 mx-1">
-                {/* <button
-                  onClick={() => {
-                    setLoadingButton(item.id)
-                    if (likedAnswers[item.id]) {
-                      dislikeMutate.mutate(item.id)
-                    } else {
-                      likeMutate.mutate(item.id)
-                    }
-                  }}
-                  disabled={likeMutate.isPending}
-                  className={`py-1 px-4 rounded-md transition-all bg-blak ${
-                    likedAnswers[item.id]
-                      ? 'border border-blue-300 text-blue-300 hover:bg-blak '
-                      : 'text-white hover:bg-blak'
-                  }`}
-                >
-                  {likedAnswers[item.id] ? 'Descurtir' : 'Curtir'}
-                </button> */}
                 <button className="bg-zinc-500 text-sm text-white py-1 px-4 rounded-md">
                   Enviar mensagem
                 </button>
