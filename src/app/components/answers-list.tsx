@@ -9,10 +9,12 @@ import { IAnswersInDoubts } from '../../types/answers'
 import LoadingIcon from './icons/loading-icon'
 import CommentList from './comment-list'
 import InputComment from './input-comment'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 const AnswersList = ({ answers }: any) => {
   const userId = Cookies.get('userId')
   const token = Cookies.get('token')
+  const { darkMode } = useDarkMode()
   const [likedAnswers, setLikedAnswers] = useState<{ [key: string]: boolean }>(
     {},
   )
@@ -65,10 +67,12 @@ const AnswersList = ({ answers }: any) => {
           {answers?.map((item: IAnswersInDoubts) => (
             <div
               key={item.id}
-              className="shadow-md px-2 rounded-md mx-3 mb-7 mt-3 "
+              className={` ${
+                darkMode ? 'shadow-sm shadow-white' : 'shadow-md'
+              } px-2 rounded-md mx-3 mb-7 mt-3 `}
             >
               <div className="flex px-2 justify-between">
-                <div className="mb-3">
+                <div className="mb-3 mt-3">
                   <h1 className="font-bold">{item.user.name}</h1>
                   <span className="text-xs overflow-y-hidden">
                     {formatDistanceToNow(new Date(item.createdAt), {

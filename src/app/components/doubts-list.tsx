@@ -31,7 +31,7 @@ const DoubtsList = () => {
   }
 
   return (
-    <div className="w-screen flex justify-center items-center flex-col m-7">
+    <div className="w-screen flex justify-center items-center flex-col m-7 overflow-y-hidden overflow-x-hidden">
       <h1 className="text-xl font-bold m-5">Dúvidas mais relevantes:</h1>
 
       {isLoading ? (
