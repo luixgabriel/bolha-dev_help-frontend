@@ -24,7 +24,7 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
   }
   return (
     <div
-      className={`w-screen flex flex-col overflow-y-hidden ${
+      className={`w-screen flex flex-col overflow-y-hidden h-screen ${
         darkMode ? 'bg-blak text-white' : 'bg-white text-black'
       }`}
     >
