@@ -23,7 +23,7 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
     )
   }
   return (
-    <section className="bg-blak sm:h-screen sm:w-screen">
+    <section className="bg-blak sm:h-screen sm:w-screen sm:overflow-y-hidden">
       <div
         className={`w-screen flex flex-col overflow-y-hidden  ${
           darkMode ? 'bg-blak text-white' : 'bg-white text-black'
