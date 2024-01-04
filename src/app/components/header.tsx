@@ -10,9 +10,13 @@ import axios from '../../services/axios'
 import { decodedImage } from '../../utils/decode'
 import { IDecoded } from '../../types/decoded'
 import { useDarkMode } from '../../hooks/useDarkMode'
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
   const [decode, setDecode] = useState<IDecoded | null>(null)
+  const [searchInMobile, setSearchInMobile] = useState<boolean>(false)
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const router = useRouter()
   const { setIsAuthenticated, isAuthenticated } = useAuth()
   const { darkMode, handleChange } = useDarkMode()
   const token = Cookies.get('token')
@@ -30,6 +34,13 @@ const Header = () => {
     getDecodeToken()
   }, [isAuthenticated])
 
+  const handleSearch = () => {
+    if (searchTerm) {
+      router.push(`/search/?filter=${searchTerm}`)
+      setSearchTerm('')
+    }
+  }
+
   return (
     <header
       className={`w-screen px-5 py-4  flex items-center justify-between ${
@@ -40,11 +51,22 @@ const Header = () => {
         <h1 className="font-black text-lg">bolha dev_help</h1>
       </Link>
       <div className="flex items-center justify-center gap-4 mx-2">
-        <Search size={20} className="sm:hidden cursor-pointer" />
+        <Search
+          size={20}
+          className="sm:hidden cursor-pointer"
+          onClick={() => setSearchInMobile((prev) => !prev)}
+        />
         <input
           type="text"
           placeholder="Qual é a sua dúvida?"
           className="text-sm bg-transparent rounded-md px-2 py-1 border border-black hidden sm:inline-block focus:outline-none"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch()
+            }
+          }}
         />
 
         <Moon size={20} onClick={handleChange} className="cursor-pointer" />
@@ -64,6 +86,17 @@ const Header = () => {
           </span>
         )}
       </div>
+      {searchInMobile && (
+        <div className="absolute">
+          <input
+            type="text"
+            placeholder="Qual é a sua dúvida?"
+            className="bg-red-500 p-2"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      )}
     </header>
   )
 }

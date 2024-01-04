@@ -87,7 +87,7 @@ const Login = () => {
                   <input
                     {...register('email')}
                     type="email"
-                    className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
+                    className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder: text-black  focus:ring-2 focus:ring-inset focus:outline-none"
                   />
                   {errors.email && (
                     <p className="text-red-500  mt-1">{errors.email.message}</p>
@@ -111,7 +111,7 @@ const Login = () => {
                     })}
                     name="password"
                     type="password"
-                    className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black  focus:ring-2 focus:ring-inset"
+                    className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder: text-black  focus:ring-2 focus:ring-inset focus:outline-none"
                   />
                   {errors.password && (
                     <p className="text-red-500  mt-1">

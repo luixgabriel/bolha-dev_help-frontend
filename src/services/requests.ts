@@ -24,6 +24,11 @@ const fetchDoubtById = async (id: string) => {
   return response
 }
 
+const fetchDoubtBySearch = async (searchTerm: string) => {
+  const response = await axios.get(`/doubts/search-doubt?filter=${searchTerm}`)
+  return response
+}
+
 const createAnswer = async (data: {
   description: string
   doubtsId: string
@@ -213,6 +218,7 @@ export {
   loginData,
   fetchDoubts,
   fetchDoubtById,
+  fetchDoubtBySearch,
   createAnswer,
   likeAnswer,
   dislikeAnswer,
