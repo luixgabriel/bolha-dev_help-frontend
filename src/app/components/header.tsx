@@ -38,6 +38,9 @@ const Header = () => {
     if (searchTerm) {
       router.push(`/search/?filter=${searchTerm}`)
       setSearchTerm('')
+      setSearchInMobile(false)
+    } else {
+      setSearchInMobile(false)
     }
   }
 
@@ -54,7 +57,11 @@ const Header = () => {
         <Search
           size={20}
           className="sm:hidden cursor-pointer"
-          onClick={() => setSearchInMobile((prev) => !prev)}
+          onClick={
+            searchInMobile
+              ? () => handleSearch()
+              : () => setSearchInMobile((prev) => !prev)
+          }
         />
         <input
           type="text"
@@ -91,7 +98,11 @@ const Header = () => {
           <input
             type="text"
             placeholder="Qual é a sua dúvida?"
-            className="bg-red-500 p-2"
+            className={`text-sm ${
+              darkMode
+                ? 'bg-gray-950 border-white'
+                : 'bg-gray-300  border-black '
+            } rounded-md px-2 py-1 border focus:outline-none`}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
