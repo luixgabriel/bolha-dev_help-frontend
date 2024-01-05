@@ -42,7 +42,7 @@ const Search = ({ searchParams }: { searchParams: { filter: string } }) => {
           data.map((item: IDoubts) => (
             <div
               key={item.id}
-              className={`mb-4 p-4 border rounded-md cursor-pointer ${
+              className={`mb-4 p-4 border rounded-md cursor-pointer w-[95%] ${
                 darkMode ? 'hover:bg-gray-950' : 'hover:bg-gray-100'
               }`}
               onClick={() => router.push(`doubts?id=${item.id}`)}

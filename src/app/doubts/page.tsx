@@ -29,7 +29,7 @@ const Doubts = ({ searchParams }: { searchParams: { id: string } }) => {
           darkMode ? 'bg-blak text-white' : 'bg-white text-black'
         }`}
       >
-        <div className="flex items-center gap-3 p-3 justify-between mt-4 w-[97%] shadow-md self-center rounded-md overflow-y-hidden">
+        <div className="flex items-center gap-3 p-3 justify-between mt-4 w-[96%] shadow-md self-center rounded-md overflow-y-hidden">
           <div className="flex items-center gap-3">
             <Image
               src={
