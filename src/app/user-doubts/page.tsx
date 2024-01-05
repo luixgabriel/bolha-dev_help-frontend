@@ -56,8 +56,8 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
     )
   }
   return (
-    <div className={`${darkMode && 'bg-blak'}`}>
-      <div className="w-screen h-screen  flex flex-col items-center mt-7">
+    <div className={`${darkMode && 'bg-blak'} w-screen h-screen`}>
+      <div className="flex flex-col items-center my-5">
         {data.map((item: IDoubts) => (
           <div
             key={item.id}
