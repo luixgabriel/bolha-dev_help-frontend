@@ -62,6 +62,11 @@ const Header = () => {
               ? () => handleSearch()
               : () => setSearchInMobile((prev) => !prev)
           }
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch()
+            }
+          }}
         />
         <input
           type="text"
