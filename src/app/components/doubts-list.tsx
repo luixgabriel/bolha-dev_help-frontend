@@ -14,17 +14,20 @@ const DoubtsList = () => {
   const { darkMode } = useDarkMode()
   const screenWidht = useWindowSize()
   const router = useRouter()
+  console.log(data)
 
   const handleNavigate = (id: string) => {
     router.push(`/doubts?id=${id}`)
   }
 
-  if (!data && !isLoading) {
+  if ((!data && !isLoading) || data?.length === 0) {
     return (
       <div className="w-screen flex justify-center items-center flex-col m-7">
         <h1 className="text-xl font-bold m-5">Dúvidas mais relevantes:</h1>
         <h1 className="font-bold">
-          Erro ao recuperar as Dúvidas, Por favor tente novamente.
+          {data?.length === 0
+            ? 'Nenhuma dúvida criada ainda, adicione a primeira!'
+            : 'Erro ao recuperar as Dúvidas, Por favor tente novamente.'}
         </h1>
       </div>
     )

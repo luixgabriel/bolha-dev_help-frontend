@@ -46,11 +46,7 @@ const DeleteModal = ({
         <div className="bg-white p-4 rounded-md z-20 w-[90%] flex flex-col items-center justify-center md:w-[30%] md:h-[40%]">
           {loading ? (
             <div className="flex justify-cente h-44">
-              <div
-                className={`animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 self-center ${
-                  darkMode ? 'border-white' : 'border-gray-900 mb-3'
-                } m-5`}
-              />
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 self-center border-gray-900 m-5" />
             </div>
           ) : (
             <>
