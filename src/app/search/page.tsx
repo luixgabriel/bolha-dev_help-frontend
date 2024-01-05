@@ -7,11 +7,21 @@ import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { useRouter } from 'next/navigation'
 import { useDarkMode } from '../../hooks/useDarkMode'
+import LoadingScreen from '../components/containers/loading-screen'
 
 const Search = ({ searchParams }: { searchParams: { filter: string } }) => {
   const { data, isLoading } = useDoubtsBySearch(searchParams.filter)
   const { darkMode } = useDarkMode()
   const router = useRouter()
+
+  if (isLoading) {
+    return (
+      <div className="w-screen h-screen">
+        <LoadingScreen />
+      </div>
+    )
+  }
+
   return (
     <div className="h-screen w-screen flex ">
       <div
@@ -22,8 +32,6 @@ const Search = ({ searchParams }: { searchParams: { filter: string } }) => {
         <h1 className="text-2xl font-bold mb-4 overflow-y-hidden">
           Resultados Encontrados
         </h1>
-
-        {isLoading && <p>Carregando...</p>}
 
         {!isLoading && data && data.length === 0 && (
           <p>Nenhum resultado encontrado.</p>
