@@ -113,14 +113,22 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   />
                   <button
                     onClick={() => handleNavigateToEdit(item.id)}
-                    className="bg-green-300 p-2 rounded-md shadow-md flex justify-center items-center gap-1 hover:bg-green-400"
+                    className={`${
+                      darkMode
+                        ? 'bg-green-500 hover:bg-green-600'
+                        : 'bg-green-300 hover:bg-green-400'
+                    } p-2 rounded-md shadow-md flex justify-center items-center gap-1`}
                   >
                     Editar
                     <Pencil size={17} />
                   </button>
                   <button
                     onClick={() => handleDelete()}
-                    className="bg-red-300 p-2 rounded-md shadow-md flex justify-between items-center gap-1 hover:bg-red-400"
+                    className={`${
+                      darkMode
+                        ? 'bg-red-500 hover:bg-red-600'
+                        : 'bg-red-300 hover:bg-red-400'
+                    } p-2 rounded-md shadow-md flex justify-between items-center gap-1`}
                   >
                     Deletar
                     <X size={17} />
