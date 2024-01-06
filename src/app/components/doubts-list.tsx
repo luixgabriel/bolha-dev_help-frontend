@@ -14,7 +14,6 @@ const DoubtsList = () => {
   const { darkMode } = useDarkMode()
   const screenWidht = useWindowSize()
   const router = useRouter()
-  console.log(data)
 
   const handleNavigate = (id: string) => {
     router.push(`/doubts?id=${id}`)
@@ -49,7 +48,7 @@ const DoubtsList = () => {
             key={item.id}
             className={`flex gap-2 p-2 rounded-lg ${
               darkMode ? 'bg-gray-950' : 'bg-gray-300'
-            } items-center justify-center w-[98%] my-1 md:w-[90%]`}
+            } items-center justify-center w-full h-14 overflow-y-hidden my-1 md:w-[90%]`}
           >
             <Image
               src={
@@ -60,8 +59,8 @@ const DoubtsList = () => {
               alt="user-icon"
               className="rounded-full cursor-pointer"
             />
-            <p className="w-[60%]">
-              {(screenWidht as number) < 500
+            <p className=" sm:w-[75%] w-[60%]">
+              {(screenWidht as number) < 640
                 ? truncateText(item.title, 35)
                 : item.title}
             </p>
