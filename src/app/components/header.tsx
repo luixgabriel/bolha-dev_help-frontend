@@ -1,5 +1,5 @@
 'use client'
-import { Moon, Search } from 'lucide-react'
+import { Moon, Search, Sun } from 'lucide-react'
 import Cookies from 'js-cookie'
 // import { cookies } from 'next/headers'
 import Link from 'next/link'
@@ -81,7 +81,11 @@ const Header = () => {
           }}
         />
 
-        <Moon size={20} onClick={handleChange} className="cursor-pointer" />
+        {darkMode ? (
+          <Sun size={20} onClick={handleChange} className="cursor-pointer" />
+        ) : (
+          <Moon size={20} onClick={handleChange} className="cursor-pointer" />
+        )}
 
         {isAuthenticated ? (
           <Profile
