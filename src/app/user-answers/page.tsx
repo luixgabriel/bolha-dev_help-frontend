@@ -92,7 +92,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
                 <p className="w-[60%]">
                   {(screenWidht as number) < 700
                     ? truncateText(item.description, 35)
-                    : item.description}
+                    : truncateText(item.description, 80)}
                 </p>
                 <div className="flex gap-2 items-center">
                   <DeleteModalAnswers
