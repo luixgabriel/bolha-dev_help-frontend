@@ -11,6 +11,7 @@ const TextAreaAnswer = ({ doubtsId }: { doubtsId: string }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<{ description: string }>()
   const { mutate, isPending } = useAnswerMutate()
@@ -21,6 +22,7 @@ const TextAreaAnswer = ({ doubtsId }: { doubtsId: string }) => {
       const description = data.description
       const createAnswer = { description, doubtsId }
       mutate(createAnswer)
+      reset()
     }
   }
   return (
