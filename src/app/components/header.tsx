@@ -27,7 +27,7 @@ const Header = () => {
       if (token) {
         const response = await axios.post('/api/auth/github/user', { token })
         setDecode(response.data)
-        if (!userId) Cookies.set('userId', response.data.id)
+        if (!userId) Cookies.set('userId', response.data.id, { expires: 7 })
         setIsAuthenticated(true)
       }
     }

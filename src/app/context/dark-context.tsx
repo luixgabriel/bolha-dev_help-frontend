@@ -23,7 +23,7 @@ export function DarkModeProvider({ children }: DarkModeContextProps) {
     const isDarkMode = Cookies.get('darkMode')
     if (isDarkMode) setDarkMode(true)
     if (darkMode === true) {
-      Cookies.set('darkMode', 'true')
+      Cookies.set('darkMode', 'true', { expires: 7 })
     }
   }, [darkMode])
   return (

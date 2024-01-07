@@ -10,7 +10,7 @@ export function useRegisterDataMutate() {
     mutationFn: registerData,
     retry: 2,
     onSuccess: (data) => {
-      Cookies.set('token', data.token)
+      Cookies.set('token', data.token, { expires: 7 })
       toast.success('Usuário autenticado com sucesso!')
       router.push('/')
     },
