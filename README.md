@@ -19,7 +19,7 @@ Bem-vindo ao frontend do bolha dev_help! Este projeto foi desenvolvido para cria
 - **Autenticação OAuth com GitHub:** Facilita o acesso dos usuários usando suas contas do GitHub.
 
 ## Autor:
-[Luis Gabriel](https://github.com/seu-usuario)
+[Luis Gabriel](https://github.com/luixgabriel)
 
 Obrigado por fazer parte da comunidade bolha dev_help! Esperamos que esta aplicação seja útil para todos os desenvolvedores. 👩‍💻👨‍💻
 
