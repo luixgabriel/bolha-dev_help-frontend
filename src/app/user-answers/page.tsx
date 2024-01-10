@@ -73,8 +73,10 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
               <div
                 key={item.id}
                 className={`flex gap-2 p-2 rounded-lg ${
-                  darkMode ? 'bg-gray-950' : 'bg-gray-300'
-                } items-center justify-center w-[90%] h-14 overflow-y-hidden my-1 md:w-[90%]`}
+                  darkMode
+                    ? 'bg-gray-950 text-white'
+                    : 'bg-gray-300  text-black'
+                } items-center justify-center w-[90%] my-1 h-14 md:w-[90%] overflow-y-hidden`}
               >
                 <Image
                   src={
