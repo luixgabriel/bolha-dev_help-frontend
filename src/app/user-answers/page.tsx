@@ -73,10 +73,8 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
               <div
                 key={item.id}
                 className={`flex gap-2 p-2 rounded-lg ${
-                  darkMode
-                    ? 'bg-gray-950 text-white'
-                    : 'bg-gray-300  text-black'
-                } items-center justify-center w-[90%] my-1`}
+                  darkMode ? 'bg-gray-950' : 'bg-gray-300'
+                } items-center justify-center w-[90%] h-14 overflow-y-hidden my-1 md:w-[90%]`}
               >
                 <Image
                   src={
@@ -89,9 +87,9 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
                   alt="user-icon"
                   className="rounded-full cursor-pointer"
                 />
-                <p className="w-[60%]">
+                <p className="sm:w-[75%] w-[60%]">
                   {(screenWidht as number) < 700
-                    ? truncateText(item.description, 35)
+                    ? truncateText(item.description, 30)
                     : truncateText(item.description, 80)}
                 </p>
                 <div className="flex gap-2 items-center">
