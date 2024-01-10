@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# bolha dev_help 🚀
 
-## Getting Started
+Bem-vindo ao frontend do bolha dev_help! Este projeto foi desenvolvido para criar uma plataforma simples e prática onde a comunidade pode compartilhar dúvidas e ajudar uns aos outros durante o processo de desenvolvimento.
 
-First, run the development server:
+![home bolha devhelp](https://github.com/luixgabriel/bolha-dev_help-frontend/assets/70019908/df4fba4e-cedf-4acf-8002-b2ebda631f69)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas:
+- **Next.js:** Framework para desenvolvimento de aplicações web.
+- **Tailwind CSS:** Biblioteca utilitária para estilização rápida e eficiente.
+- **React Hook Form:** Biblioteca para gerenciar formulários em React.
+- **React Query:** Biblioteca para gerenciamento de estados globais e consulta de dados.
+- **Zod:** Validador de esquema para garantir a integridade dos dados.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Funcionalidades Principais:
+- **Compartilhamento de Dúvidas:** Os desenvolvedores podem postar suas dúvidas na plataforma.
+- **Acompanhamento de Dúvidas:** Os usuários podem acompanhar as dúvidas de outros desenvolvedores.
+- **Respostas Colaborativas:** Encoraja-se a colaboração entre os membros para fornecer respostas e soluções.
+- **Autenticação OAuth com GitHub:** Facilita o acesso dos usuários usando suas contas do GitHub.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Autor:
+[Luis Gabriel](https://github.com/luixgabriel)
 
-## Learn More
+Obrigado por fazer parte da comunidade bolha dev_help! Esperamos que esta aplicação seja útil para todos os desenvolvedores. 👩‍💻👨‍💻
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
