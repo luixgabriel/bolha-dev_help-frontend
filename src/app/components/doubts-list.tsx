@@ -33,7 +33,7 @@ const DoubtsList = () => {
   }
 
   return (
-    <div className="w-screen flex justify-center items-center flex-col my-7 overflow-y-hidden overflow-x-hidden">
+    <div className="w-screen flex justify-center items-center flex-col m-5 mb-7 overflow-y-hidden overflow-x-hidden">
       <h1 className="text-xl font-bold m-5">Dúvidas mais relevantes:</h1>
 
       {isLoading ? (
@@ -46,9 +46,9 @@ const DoubtsList = () => {
         orderRelevantDoubts(data).map((item) => (
           <div
             key={item.id}
-            className={`flex gap-2 px-1 py-2 rounded-lg ${
+            className={`flex gap-2 p-2 rounded-lg ${
               darkMode ? 'bg-gray-950' : 'bg-gray-300'
-            } items-center justify-center w-[94%] h-14 overflow-y-hidden my-1 md:w-[90%]`}
+            } items-center justify-center w-full h-14 overflow-y-hidden my-1 md:w-[90%]`}
           >
             <Image
               src={
@@ -61,7 +61,7 @@ const DoubtsList = () => {
             />
             <p className="sm:w-[75%] w-[60%]">
               {(screenWidht as number) < 640
-                ? truncateText(item.title, 35)
+                ? truncateText(item.title, 33)
                 : item.title}
             </p>
             <span className="flex gap-1">
