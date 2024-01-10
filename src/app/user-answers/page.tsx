@@ -84,14 +84,14 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
                       ? (item.user.imageUrl as string)
                       : defaultImg
                   }
-                  width={48}
-                  height={48}
+                  width={42}
+                  height={42}
                   alt="user-icon"
                   className="rounded-full cursor-pointer"
                 />
-                <p className="sm:w-[75%] w-[60%]">
-                  {(screenWidht as number) < 700
-                    ? truncateText(item.description, 30)
+                <p className="sm:w-[75%] w-[60%] ">
+                  {(screenWidht as number) < 640
+                    ? truncateText(item.description, 18)
                     : truncateText(item.description, 80)}
                 </p>
                 <div className="flex gap-2 items-center">

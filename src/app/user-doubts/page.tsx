@@ -77,7 +77,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   darkMode
                     ? 'bg-gray-950 text-white'
                     : 'bg-gray-300  text-black'
-                } items-center justify-center w-[90%] my-1 h-14 md:w-[90%] overflow-y-hidden`}
+                } items-center justify-center w-[90%] my-1 h-14  overflow-y-hidden`}
               >
                 <Image
                   src={
@@ -91,7 +91,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
                   className="rounded-full cursor-pointer"
                 />
                 <p className="sm:w-[75%] w-[60%]">
-                  {(screenWidht as number) < 700
+                  {(screenWidht as number) < 640
                     ? truncateText(item.title, 30)
                     : item.title}
                 </p>
