@@ -68,7 +68,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
             </h1>
           </div>
         ) : (
-          <div className="my-5 flex flex-col items-center">
+          <div className="mt-3 mb-5 flex flex-col items-center w-full">
             {data.map((item: IUserAnswers) => (
               <div
                 key={item.id}
@@ -76,7 +76,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
                   darkMode
                     ? 'bg-gray-950 text-white'
                     : 'bg-gray-300  text-black'
-                } items-center justify-center w-[90%] my-1 h-14 md:w-[90%] overflow-y-hidden`}
+                } items-center justify-center w-[90%] my-1 h-14 overflow-y-hidden`}
               >
                 <Image
                   src={
@@ -84,8 +84,8 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
                       ? (item.user.imageUrl as string)
                       : defaultImg
                   }
-                  width={40}
-                  height={40}
+                  width={48}
+                  height={48}
                   alt="user-icon"
                   className="rounded-full cursor-pointer"
                 />

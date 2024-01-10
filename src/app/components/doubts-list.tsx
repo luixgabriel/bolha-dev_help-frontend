@@ -61,7 +61,7 @@ const DoubtsList = () => {
             />
             <p className="sm:w-[75%] w-[60%]">
               {(screenWidht as number) < 640
-                ? truncateText(item.title, 30)
+                ? truncateText(item.title, 33)
                 : item.title}
             </p>
             <span className="flex gap-1">

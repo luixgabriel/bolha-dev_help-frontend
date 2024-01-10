@@ -69,7 +69,7 @@ const UserDoubts = ({ searchParams }: { searchParams: { id: string } }) => {
             </h1>
           </div>
         ) : (
-          <div className="flex flex-col items-center my-5">
+          <div className="flex flex-col items-center mt-3 mb-5">
             {data.map((item: IDoubts) => (
               <div
                 key={item.id}
