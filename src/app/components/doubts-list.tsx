@@ -46,7 +46,7 @@ const DoubtsList = () => {
         orderRelevantDoubts(data).map((item) => (
           <div
             key={item.id}
-            className={`flex gap-2 p-2 rounded-lg ${
+            className={`flex gap-2 px-1 py-2 rounded-lg ${
               darkMode ? 'bg-gray-950' : 'bg-gray-300'
             } items-center justify-center w-[94%] h-14 overflow-y-hidden my-1 md:w-[90%]`}
           >
