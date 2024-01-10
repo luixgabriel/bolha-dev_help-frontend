@@ -72,7 +72,7 @@ const UserAnswers = ({ searchParams }: { searchParams: { id: string } }) => {
             {data.map((item: IUserAnswers) => (
               <div
                 key={item.id}
-                className={`flex gap-2 p-2 rounded-lg ${
+                className={`flex gap-2 px-4 rounded-lg ${
                   darkMode
                     ? 'bg-gray-950 text-white'
                     : 'bg-gray-300  text-black'
